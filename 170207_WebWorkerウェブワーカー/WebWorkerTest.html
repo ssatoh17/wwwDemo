@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>for文内でhtmlを再描画するサンプル(WebWorkerバージョン)</title>
+  <script src="./multiple.js"></script>
+</head>
+
+<body>
+<div>
+  <p >WebWorkerを用いて，for文内でhtmlを再描画する</p>
+</div>
+
+<div>
+  <p >数値を入れてください。<input type="text" id="num" /></p>
+  <p >ボタンを押してみてください。<button id="a">load</button></p>
+  <p id="my1">ここが書き換わります</p>
+</div>
+
+<div id="foot">
+  <a href="./sample_button.html">Ajaxを用いたサンプルへ</a>
+</div>
+
+<script type="text/javascript">
+// ワーカーの実装チェック
+if (window.Worker) {  
+  // Web Workersに関する処理を記述
+  document.getElementById("a").addEventListener("click", send, false);
+  var worker = new Worker("multiple.js");
+} else {
+  window.alert("このブラウザではWeb Workersは利用できません");
+}
+
+function send() {
+  var num = document.getElementById("num").value;
+  
+  // ワーカーに入力値を送る
+  worker.postMessage({ "val": num});
+  
+  alert("for文処理終了!スリープ処理開始(10秒)!")
+  Sleep(10);
+  alert("スリープ終了!．javascriptの処理が全て終了しました．")
+}
+
+// ワーカーからのメッセージ取得時の処理
+worker.onmessage = function (event) {
+    console.log("ワーカーからメッセージ受信！");
+    document.getElementById("my1").innerHTML = event.data;
+}
+</script>
+</body>
+</html>

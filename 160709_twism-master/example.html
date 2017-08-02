@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clickable Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://github.com/cody1213/twism">TWISM</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="example-usa.html">USA</a></li>
+            <li><a href="example-custom.html">Custom</a></li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+          <div id="worldmap"></div>
+        </div>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="dist/jquery.twism.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#worldmap').twism("create", 
+        {
+          map: "world",
+          border: "red",
+          disableCountries: ['ar'],
+          individualCountrySettings: [{
+            name: "cn",
+            color: "red"
+          }]
+        }, function() {
+          //callback function after map loads
+          $('#worldmap').twism("setCountry", {
+            name: "ca",
+            color: "blue",
+            hoverColor: "yellow",
+            hoverBorder: "purple",
+            hover: function(state) {
+              alert("You clicked "+state);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

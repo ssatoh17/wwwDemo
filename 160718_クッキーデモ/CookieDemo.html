@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width,initial-scale=1">      
+       <title>打ち消し線</title>
+   </head>         
+   <body>
+   
+<script type="text/javascript"><!--
+
+/*        クッキーに登録する汎用関数              */
+/* 書式 : mySetCookie(クッキー名,値,有効期限日数) */
+/* 戻り値 : なし(void)                            */
+function mySetCookie(myCookie,myValue,myDay){
+   myValue = "" + myValue;
+   myValue = myValue.replace( /</g , "&lt;" ); // XSS対策
+   myValue = myValue.replace( />/g , "&gt;" ); // XSS対策
+   myExp = new Date();
+   myExp.setTime(myExp.getTime()+(myDay*24*60*60*1000));
+   myItem = "@" + myCookie + "=" + escape(myValue) + ";";
+   myExpires = "expires="+myExp.toGMTString();
+   document.cookie =  myItem + myExpires;
+}
+
+/*        クッキーを取り込む汎用関数              */
+/* 書式 : myGetCookie(クッキー名)                 */
+/* 戻り値 : 値(string)  null:該当なし             */
+function myGetCookie(myCookie){
+   myCookie = "@" + myCookie + "=";
+   myValue = null;
+   myStr = document.cookie + ";" ;
+   myOfst = myStr.indexOf(myCookie);
+   if (myOfst != -1){
+      myStart = myOfst + myCookie.length;
+      myEnd   = myStr.indexOf(";" , myStart);
+      myValue = unescape(myStr.substring(myStart,myEnd));
+      myValue = "" + myValue;
+      myValue = myValue.replace( /</g , "&lt;" ); // XSS対策
+      myValue = myValue.replace( />/g , "&gt;" ); // XSS対策
+   }
+   return myValue;
+}
+// --></script>
+<script type="text/javascript"><!--
+myUser = myGetCookie("USER_NAME");      // 名前読込
+if (myUser == null){                    // 初めての訪問
+   myUser = prompt("はじめまして！　名前を教えてください！","匿名");
+   if (myUser == null){                 // 名前入力→キャンセルした
+      myUser = "匿名";
+   }else{
+      myUser = myUser.replace( /</g , "&lt;" ); // XSS対策
+      myUser = myUser.replace( />/g , "&gt;" ); // XSS対策
+   }
+   mySetCookie("USER_NAME",myUser,365); // 名前保存
+   myCount = 1;                         // 訪問回数→初回
+}else{                                  // ２度以上の訪問
+   myCount = eval(myGetCookie("USER_COUNTER")); // カウンター読込
+}
+document.write(myUser,"さん、",myCount,"度目の訪問ですね！");
+myCount = myCount + 1;                   // カウンター加算
+mySetCookie("USER_COUNTER",myCount,365); // カウンター更新
+mySetCookie("USER_NAME",myUser,365);     // 名前の賞味期間を更新
+// --></script>
+
+   </body>
+</html>

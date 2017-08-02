@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+  	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  	<title>折り畳みはJSファイルもCSS使わずとも簡単につくれた！</title>
+  </head>
+  <body>
+  
+    これを、OneNoteのエクスポートでできるようになれば便利。<br>
+    画像入り簡易マニュアル（ダイジェスト版マニュアル）が簡単に作れる。
+	<!-- 折り畳み展開ポインタ -->
+	<div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+		<a style="cursor:pointer;">⊕ ▼第一階層</a> 
+	</div>
+	<!--// 折り畳み展開ポインタ -->
+	 
+	<!-- 折り畳まれ部分 -->
+	<div style="margin-left:30px">
+		<div id="open" style="display:none;clear:both;">
+				<!--ここの部分が折りたたまれる＆展開される部分になります。自由に記述してください。-->
+				<br>
+				第二階層１<br>
+				第二階層２　OneNoteをテキストエディタに貼り付けると、インデントはタブ文字になっていた。
+				<div onclick="obj=document.getElementById('open2').style; obj.display=(obj.display=='none')?'block':'none';">
+					  <a style="cursor:pointer;">▼第二階層３ クリックで第三階層を展開</a>
+				</div>
+				<div style="margin-left:30px">
+						<div id="open2" style="display:none;clear:both;">
+							第三階層１<br>
+							第三階層２
+						</div>
+			    </div>
+		</div>
+    </div>  <!-- <div style="margin-left:30px"> の終わり-->
+	<!--// 折り畳まれ部分 -->
+	
+  </body>
+</html>

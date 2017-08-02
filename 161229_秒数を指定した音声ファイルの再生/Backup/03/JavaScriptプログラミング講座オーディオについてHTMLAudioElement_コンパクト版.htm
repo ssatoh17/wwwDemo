@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0031)http://hakuhin.jp/js/audio.html -->
+<html lang="ja-JP" style="height: 100%;"><div class="oneNoteWebClipperIsInstalledOnThisBrowser" style="display: none;"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="author" content="hakuhin">
+	<meta name="language" content="Japanese">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="keywords" content="JavaScript,Audio">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-translate-customization" content="a48485daf0578662-0247ae5623b4ea71-g0a1657ec1a99ac56-a">
+
+	<link rel="shortcut icon" href="http://hakuhin.jp/icon/js.ico" type="image/vnd.microsoft.icon">
+	<link rel="stylesheet" type="text/css" href="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/main.css">
+	<link rel="stylesheet" type="text/css" href="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/js.css">
+	<link rel="author" href="https://plus.google.com/113623142701014539697">
+	<script src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/ca-pub-2028288171521864.js"></script><script async="" src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/analytics.js"></script><script type="text/javascript" src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/main.js"></script>
+	<!--[if lte IE 7.0]><link rel="stylesheet" type="text/css" href="../css/ie.css"><![endif]-->
+
+
+	<title>JavaScriptプログラミング講座【オーディオについて（HTMLAudioElement）】</title>
+
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/main_ja.js"></script><script type="text/javascript" charset="UTF-8" src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/element_main.js"></script><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body class="body" data-pinterest-extension-installed="cr2.0.5" style="position: relative; min-height: 100%; top: 0px; transition: 0.6s ease-in-out;" cz-shortcut-listen="true">
+
+
+
+
+
+<div id="out" style="left: 0px;">
+
+
+
+<br>
+<div id="main">
+
+<script type="text/javascript" src="./JavaScriptプログラミング講座オーディオについてHTMLAudioElement_コンパクト版_files/index.js" async=""></script>
+
+
+<div id="MENU" class="anchor_target"></div>
+<div class="world">
+    
+<!--
+<script type="text/javascript">
+
+HH_WriteTabForReference([
+	{folder:"js"  ,file:"audio.html"}
+]);
+//
+</script>
+-->
+    
+    <div><table cellspacing="0"><tbody><tr><td style="padding:0px;" valign="bottom"><div style="padding:8px 20px; font-size:14px; font-weight:bold; font-weight:bold; border-radius: 10px 10px 0px 0px; background:#DCCAD5;">JavaScript</div></td><td style="padding:0px;" valign="bottom"><a href="http://hakuhin.jp/as/sound.html" style="text-decoration: none;"><div style="color:#000; padding:5px 20px; margin:0px 0px 0px 5px; font-size:12px; font-weight:bold; border-radius: 10px 10px 0px 0px; background:#CFDAE4;" onmouseover="this.style.background=&#39;#DFEAF4&#39;; this.style.padding=&#39;8px 20px&#39;;" onmouseout="this.style.background=&#39;#CFDAE4&#39;; this.style.padding=&#39;5px 20px&#39;;">ActionScript1.0～2.0</div></a></td><td style="padding:0px;" valign="bottom"><a href="http://hakuhin.jp/as3/sound.html" style="text-decoration: none;"><div style="color: rgb(0, 0, 0); padding: 5px 20px; margin: 0px 0px 0px 5px; font-size: 12px; font-weight: bold; border-radius: 10px 10px 0px 0px; background: rgb(198, 221, 198);" onmouseover="this.style.background=&#39;#D6EDD6&#39;; this.style.padding=&#39;8px 20px&#39;;" onmouseout="this.style.background=&#39;#C6DDC6&#39;; this.style.padding=&#39;5px 20px&#39;;">ActionScript3.0</div></a></td></tr></tbody></table></div>
+
+
+
+
+<div id="AUDIO_04" class="anchor_target"></div>
+
+
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_04");</script>
+</div>
+
+
+
+<div id="AUDIO_00" class="anchor_target"></div>
+
+
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_00");</script>
+</div>
+
+
+
+<div id="AUDIO_01" class="anchor_target"></div>
+
+
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_01");</script>
+</div>
+
+
+
+<div id="AUDIO_02" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+
+<div class="break_l2">　</div>
+
+<script type="text/javascript"><!--
+HH_WriteSampleForJavaScript("\nURL:\<br\>\n\<input id=\"edit_02_url\" style=\"width:100%;\"\>\</input\>\<br\>\n\<input type=\"button\" id=\"button_02_load\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"読み込み\"\>\n\<input type=\"button\" id=\"button_02_play\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"再生\"\>\n\<input type=\"button\" id=\"button_02_pause\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"一時停止\"\>\n\<input type=\"button\" id=\"button_02_stop\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"停止\"\>\<br\>\n\n\<input type=\"range\" id=\"edit_02_slider\" style=\"width:100%;\" min=\"0\" max=\"1.0\" step=\"0.00001\" value=\"0.0\"\>\</input\>\<br\>\n\n\<div style=\"width:100%; margin:0px 0px 10px 0px;\"\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>自動再生:\<input type=\"checkbox\" id=\"input_02_autoplay\" checked\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>ループ:\<input type=\"checkbox\" id=\"input_02_loop\"\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>再生速度:\<input type=\"number\" id=\"input_02_rate\" value=\"1.0\" min=\"-10.0\" max=\"10.0\" step=\"0.01\"\>\</span\>\n\</div\>\nリザルト:\<br\>\n\<textarea id=\"edit_02_result\" style=\"width:100%; height:100px; margin:0px 0px 5px 0px;\" disabled\>\</textarea\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\t// AudioElement を作成\n\tvar audio = new Audio();\n\n\t// オーディオのイベント\n\taudio.addEventListener(\"timeupdate\",function (e){\n\t\t// スライダーを更新\n\t\telement_slider.max = audio.duration;\n\t\telement_slider.value = audio.currentTime;\n\t},false);\n\n\t// 各エレメントを取得\n\tvar element_url = document.getElementById(\"edit_02_url\");\n\tvar element_slider = document.getElementById(\"edit_02_slider\");\n\tvar element_rate = document.getElementById(\"input_02_rate\");\n\tvar element_autoplay = document.getElementById(\"input_02_autoplay\");\n\tvar element_loop = document.getElementById(\"input_02_loop\");\n\tvar element_result = document.getElementById(\"edit_02_result\");\n\n\tvar element;\n\t\n\t// 読み込みボタンの element を取得\n\telement = document.getElementById(\"button_02_load\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\t// 送信したい URL 先\n\t\tvar url = element_url.value;\n\n\t\t// URL アドレスをセット\n\t\taudio.src = url;\n\n\t\t// 読み込み開始\n\t\taudio.load();\n\t};\n\n\n\t// 再生ボタンの element を取得\n\telement = document.getElementById(\"button_02_play\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.play();\n\t};\n\n\n\t// 一時停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_pause\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.pause();\n\t};\n\n\n\t// 停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_stop\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.currentTime = 0;\n\t\taudio.pause();\n\t};\n\n\n\t// 60 fps 間隔で実行する\n\tsetInterval(function (){\n\t\tvar v;\n\t\tv = element_rate.value;\n\t\taudio.playbackRate = v;\n\n\t\tv = element_autoplay.checked;\n\t\taudio.autoplay = v;\n\n\t\tv = element_loop.checked;\n\t\taudio.loop = v;\n\n\t\t// リザルトを更新\n\t\tvar s = \"\";\n\t\ts += \"currentTime:\" + audio.currentTime + \"\\n\";\n\t\ts += \"duration:\" + audio.duration + \"\\n\";\n\t\ts += \"paused:\" + audio.paused + \"\\n\";\n\t\ts += \"seeking:\" + audio.seeking + \"\\n\";\n\t\ts += \"readyState:\" + audio.readyState + \"\\n\";\n\t\telement_result.value = s;\n\n\t},1000/60);\n\t\n\t\n\t// スライダー変更時に実行されるイベント\n\telement_slider.onchange = function (){\n\t\taudio.currentTime = this.value;\n\t};\n\n\t// サーバ側で用意しているサウンドファイルのリスト\n\tvar audio_file_list = [\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.m4a\" , type:\"audio/mp4\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.mp3\" , type:\"audio/mpeg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.ogg\" , type:\"audio/ogg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.wav\" , type:\"audio/wav\"}\n\t];\n\t\n\t// サポートしているコンテンツタイプを調べてデフォルト URL を設定する\n\tvar i;\n\tvar num = audio_file_list.length;\n\tfor(i=0;i\<num;i++){\n\t\tif(audio.canPlayType(audio_file_list[i].type) !== \"\"){\n\t\t\telement_url.value = audio_file_list[i].url;\n\t\t\tbreak;\n\t\t}\n\t}\n})();\n//--\>\n\</script\>");
+//-->
+</script>
+    
+    <div class="js_sample">
+        
+        <div class="js_sample_head">サンプル2</div>
+        <div class="js_sample_foot">
+URL:<br>
+<input id="edit_02_url" style="width:100%;"><br>
+<input type="button" id="button_02_load" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="読み込み">
+<input type="button" id="button_02_play" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="再生">
+<input type="button" id="button_02_pause" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="一時停止">
+<input type="button" id="button_02_stop" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="停止"><br>
+
+<input type="range" id="edit_02_slider" style="width:100%;" min="0" max="105.023855" step="0.00001" value="0.0"><br>
+
+リザルト:<br>
+<textarea id="edit_02_result" style="width:100%; height:100px; margin:0px 0px 5px 0px;" disabled=""></textarea>
+
+<script type="text/javascript">
+
+// 匿名関数内で実行
+(function (){
+	// AudioElement を作成
+	var audio = new Audio();
+
+	// オーディオのイベント
+	audio.addEventListener("timeupdate",function (e){
+		// スライダーを更新
+		element_slider.max = audio.duration;
+		element_slider.value = audio.currentTime;
+	},false);
+
+	// 各エレメントを取得
+	var element_url = document.getElementById("edit_02_url");
+	var element_slider = document.getElementById("edit_02_slider");
+	var element_rate = document.getElementById("input_02_rate");
+	var element_autoplay = document.getElementById("input_02_autoplay");
+	var element_loop = document.getElementById("input_02_loop");
+	var element_result = document.getElementById("edit_02_result");
+
+	var element;
+	
+	// 読み込みボタンの element を取得
+	element = document.getElementById("button_02_load");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		// 送信したい URL 先
+		var url = element_url.value;
+
+		// URL アドレスをセット
+		audio.src = url;
+
+		// 読み込み開始
+		audio.load();
+	};
+
+
+	// 再生ボタンの element を取得
+	element = document.getElementById("button_02_play");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.play();
+	};
+
+	// 一時停止ボタンの element を取得
+	element = document.getElementById("button_02_pause");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.pause();
+	};
+
+	// 停止ボタンの element を取得
+	element = document.getElementById("button_02_stop");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.currentTime = 0;
+		audio.pause();
+	};
+
+	// 60 fps 間隔で実行する
+	setInterval(function (){
+		var v;
+		v = element_rate.value;
+		audio.playbackRate = v;
+
+		v = element_autoplay.checked;
+		audio.autoplay = v;
+
+		v = element_loop.checked;
+		audio.loop = v;
+
+		// リザルトを更新
+		var s = "";
+		s += "currentTime:" + audio.currentTime + "\n";
+		s += "duration:" + audio.duration + "\n";
+		s += "paused:" + audio.paused + "\n";
+		s += "seeking:" + audio.seeking + "\n";
+		s += "readyState:" + audio.readyState + "\n";
+		element_result.value = s;
+
+	},1000/60);
+	
+	
+	// スライダー変更時に実行されるイベント
+	element_slider.onchange = function (){
+		audio.currentTime = this.value;
+	};
+
+	// サーバ側で用意しているサウンドファイルのリスト
+	var audio_file_list = [
+//		{url:"http://hakuhin.jp/download/js/audio/sample_00.m4a" , type:"audio/mp4"},
+        {url:"sample.m4a" , type:"audio/mp4"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.mp3" , type:"audio/mpeg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.ogg" , type:"audio/ogg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.wav" , type:"audio/wav"}
+	];
+	
+	// サポートしているコンテンツタイプを調べてデフォルト URL を設定する
+	var i;
+	var num = audio_file_list.length;
+	for(i=0;i<num;i++){
+		if(audio.canPlayType(audio_file_list[i].type) !== ""){
+			element_url.value = audio_file_list[i].url;
+			break;
+		}
+	}
+})();
+//
+</script>
+    </div>
+    </div>
+
+</div>
+
+
+</div><!--world-->
+
+<!--menu-->
+
+
+</div>
+    <!--main-->
+    
+<script type="text/javascript">HH_WriteReceive();</script>
+
+</div>
+
+</html>

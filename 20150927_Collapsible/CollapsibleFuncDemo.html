@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+	<title>折りたたみ機能（collapsible function) のデモ</title>
+</head>
+<body>
+<!-- 折り畳み展開ポインタ -->
+<div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+	<a style="cursor:pointer;">▼ クリックで展開</a>
+</div>
+<!--// 折り畳み展開ポインタ ここまで --> 
+<!-- 折り畳まれ部分 -->
+<div id="open" style="display:none;clear:both;">
+	<!--ここの部分が折りたたまれる＆展開される部分になります。
+	自由に記述してください。-->
+	<ol>
+		<li>インデントはliタグでいけるが、</li>
+		<li>箇条書きにしたい場合は？？</li>
+		<li>折りたたみのネストはいける？</li>
+		<div onclick="obj=document.getElementById('open11').style; obj.display=(obj.display=='none')?'block':'none';">
+			<a style="cursor:pointer;">▼ クリックで展開</a>
+		</div>
+		<div id="open11" style="display:none;clear:both;">
+			(おそらく)第一階層と第二階層でIDを変えないと折りたたみの中に折りたたみ機能は入れられない(
+			入れ子にはできない）
+		</div>
+	<ol>
+</div>
+
+<!-- 折り畳み展開ポインタ２項目目 -->
+<div onclick="obj=document.getElementById('open21').style; obj.display=(obj.display=='none')?'block':'none';">
+	<a style="cursor:pointer;">▼ クリックで展開</a>
+</div>
+<!--// 折り畳み展開ポインタ ここまで --> 
+<!-- 折り畳まれ部分 -->
+<div id="open21" style="display:none;clear:both;">
+	<!--ここの部分が折りたたまれる＆展開される部分になります。
+	自由に記述してください。-->
+	<ol>
+		<li>インデントはliタグでいけるが、</li>
+		<li>箇条書きにしたい場合は？？</li>
+		<li>折りたたみのネストはいける？</li>
+		<div onclick="obj=document.getElementById('open22').style; obj.display=(obj.display=='none')?'block':'none';">
+			<a style="cursor:pointer;">▼ クリックで展開</a>
+		</div>
+		<div id="open22" style="display:none;clear:both;">
+			(おそらく)第一階層と第二階層でIDを変えないと折りたたみの中に折りたたみ機能は入れられない(
+			入れ子にはできない）
+		</div>
+	<ol>
+</div>
+
+</body>
+</html>

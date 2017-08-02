@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://www.enjoyxstudy.com/javascript/incsearch/demo/table_view2.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!--<meta name="description" content="">-->
+    <!--<meta name="author" content="">-->
+    <!--<link rel="icon" href="/favicon.ico">-->
+
+    <title>incsearch.js - サンプル3：テーブル表示＆ページ遷移＆列選択のサンプル</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://onozaty.hatenablog.com/rss">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/baselayout.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+      <!--
+        #page_link {
+          font-size: 80%;
+          text-align: right;
+        }
+        div#contents table {
+          width: 80%;
+          margin: 5px 2px 5px 15px;
+          border:solid 1px #000000;
+          border-collapse: collapse;
+        }
+        div#contents th, div#contents td {
+          padding: 2px 4px;
+          border:solid 1px;
+        }
+        strong {
+          font-weight: normal;
+        }
+        strong.high1 {
+          background-color: #FFFF99
+        }
+        strong.high2 {
+          background-color: #CCFFFF;
+        }
+        strong.high3 {
+          background-color: #CCFF99;
+        }
+        strong.high4 {
+          background-color: #FFCC99;
+        }
+        tr.focus {
+          background-color: #FFDFFF;
+        }
+        -->
+    </style>
+  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+  <body data-pinterest-extension-installed="cr1.39.1" cz-shortcut-listen="true">
+    <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="http://www.enjoyxstudy.com/" class="navbar-brand">Enjoy*Study</a>
+        </div>
+        <nav class="collapse navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="http://www.enjoyxstudy.com/">Home</a>
+            </li>
+            <li>
+              <a href="http://blog.enjoyxstudy.com/">Blog</a>
+            </li>
+            <li>
+              <a href="http://www.enjoyxstudy.com/products.html">Products</a>
+            </li>
+            <li>
+              <a href="http://www.enjoyxstudy.com/profile.html">Profile</a>
+            </li>
+            <li>
+              <a href="http://www.enjoyxstudy.com/contact.html">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </nav>
+
+    <div id="masthead">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>incsearch.js
+              <p class="lead text-muted">サンプル3：テーブル表示＆ページ遷移＆列選択のサンプル</p>
+            </h1>
+          </div>
+          <!--
+          <div class="col-md-5">
+            <div class="well well-lg"> 
+              <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div> 
+      </div><!--/container-->
+    </div><!--/masthead-->
+    
+    <!--main-->
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <p>incsearch.js(IncSearch.ViewTable)を使った、テーブル表示＆ページ遷移のサンプルです。</p>
+          <p>incsearch.jsの説明は、<a href="http://www.enjoyxstudy.com/javascript/incsearch/">「incsearch.js - インクリメンタルサーチライブラリ」</a>を参照ください。</p>
+
+          <div>
+            <p class="text-muted">Sponsored Link</p>
+            <script async="" src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/analytics.js"></script><script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/ca-pub-9526560787951326.js"></script><script async="" src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/adsbygoogle.js"></script>
+            <!-- メイン:コンテンツ内(レスポンシブ＋テキスト/ディスプレイ) -->
+            <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-9526560787951326" data-ad-slot="2683115431" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1140px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1140px;background-color:transparent"><iframe width="1140" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/saved_resource.html"></iframe></ins></ins></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
+          <hr>
+
+          <h2>サンプル</h2>
+          <p>下記に入力すると、一覧から部分一致で検索し、一致する列を表示します。(スペース区切りで複数入力可)</p>
+          <p>ページリンクを選択するか、またはCtrl + Left/Right でページ遷移します。</p>
+          <p>Ctrl + Up/Downで選択列を移動し、Ctrl + Returnで選択列の内容を表示します。</p>
+          <div>
+          <p>
+            <input id="text" type="text" name="pattern" value="" autocomplete="off" size="40">
+            &nbsp;&nbsp;<span id="status">3302件中 3302件ヒット (<span id="display">1から10</span>件まで表示)</span></p><div id="page_link"><a href="javascript:void(0)">次ページ</a></div>
+          <p></p>
+          <!-- 検索結果の表示エリア -->
+          <div id="view_area"><table class="table table-bordered"><tbody><tr><th width="20%">郵便番号</th><th width="80%">住所</th></tr><tr class="focus"><td>1000000</td><td>東京都千代田区以下に掲載がない場合</td></tr><tr><td>1020072</td><td>東京都千代田区飯田橋</td></tr><tr><td>1020082</td><td>東京都千代田区一番町</td></tr><tr><td>1010032</td><td>東京都千代田区岩本町</td></tr><tr><td>1010047</td><td>東京都千代田区内神田</td></tr><tr><td>1000011</td><td>東京都千代田区内幸町</td></tr><tr><td>1000004</td><td>東京都千代田区大手町</td></tr><tr><td>1010044</td><td>東京都千代田区鍛冶町</td></tr><tr><td>1000013</td><td>東京都千代田区霞が関（次のビルを除く）</td></tr><tr><td>1006090</td><td>東京都千代田区霞が関霞が関ビル（地階・階層不明）</td></tr></tbody></table></div>
+        </div>
+
+          <hr>
+
+          <h3>サンプルの内容</h3>
+          <pre>new IncSearch.ViewTable(
+  'text',      // 入力が行われるエレメントのID
+  'view_area', // 検索結果を表示するエレメントのID
+  list,        // 検索対象のリスト
+  {dispMax: 10,  // オプション
+   startElementText: '&lt;table&gt;&lt;tr&gt;&lt;th width="20%"&gt;郵便番号&lt;/th&gt;&lt;th width="80%"&gt;住所&lt;/th&gt;',
+   searchBefore:
+     function(){
+       $('status').innerHTML = 'search...';
+     },
+   searchAfter:
+     function(){
+       var matchCount = this.matchList.length;
+       var displayInfo = '';
+
+       if (matchCount != 0) {
+         var start = 1;
+         var end   = this.dispMax;
+
+         if (this.dispMax == 0 || end &gt; matchCount) {
+           end = matchCount;
+         }
+         displayInfo = '(&lt;span id="display"&gt;' + start + 'から' + end + '&lt;/span&gt;件まで表示)';
+       }
+       $('status').innerHTML = this.searchValues.length.toString() + '件中 '
+                               + matchCount + '件ヒット ' + displayInfo;
+     },
+   changePageAfter:
+     function(pageNo){
+       var matchCount = this.matchList.length;
+
+       var start = (pageNo - 1) * this.dispMax + 1;
+       var end   = start + this.dispMax - 1;
+
+       if (end &gt; matchCount) {
+         end = matchCount;
+       }
+
+       $('display').innerHTML = start.toString() + 'から' + end; 
+     },
+   pageLink: 'page_link',
+   pagePrevName: '前ページ',
+   pageNextName: '次ページ',
+   moveRow: true,
+   selectRowCallback: function(rowData){setTimeout(function(){alert(rowData)}, 1);},
+   useHotkey: true
+   }
+);
+</pre>
+          <ul>
+            <li>テーブル表示(IncSearch.ViewTable)のサンプルです。</li>
+            <li>対象データは、東京都の郵便番号:住所(3302件)で、外部JS(list.js)に記載し、それを読み込んでいます。</li>
+            <li>オプション(dispMax)により、表示件数を10件までにしています。</li>
+            <li>オプション(startElementText)にて、テーブルのヘッダ部分を指定しています。</li>
+            <li>オプション(searchBefore、searchAfter)を使用し、検索条件に一致した件数を表示しています。</li>
+            <li>オプション(searchAfter、changePageAfter)を使用し、現在ページでの表示範囲を表示しています。</li>
+            <li>オプション(pageLink、pagePrevName、pageNextName)を使用し、ページリンクを表示しています。</li>
+            <li>オプション(useHotkey:true)により、Ctrl + Left/Right でページ遷移が行えます。</li>
+            <li>オプション(moveRow:true)により、Ctrl + Up/Down で列の遷移が行えます。また、selectRowCallbackオプションで、Ctrl + Returnで選択列の情報を表示するようにしています。</li>
+          </ul>
+
+          <div>
+            <p class="text-muted">Sponsored Link</p>
+            <script async="" src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/adsbygoogle.js"></script>
+            <!-- メイン:コンテンツ内(レスポンシブ＋テキスト/ディスプレイ) -->
+            <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-9526560787951326" data-ad-slot="2683115431" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1140px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:1140px;background-color:transparent"><iframe width="1140" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/saved_resource(1).html"></iframe></ins></ins></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+        </div>
+      </div><!--/row-->
+    </div><!--/container-->
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">
+          ©&nbsp;2006&nbsp;<a href="http://www.enjoyxstudy.com/">onozaty</a>.
+        </p>
+      </div>
+      <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/c9c2c62029.js" type="text/javascript"></script><a href="http://trackfeed.com/?r=c9c2c62029" target="_blank"><img src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/trackfeedbarblue.gif" border="0" alt="track feed"></a>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/jquery.min.js"></script>
+    <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/bootstrap.min.js"></script>
+    <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/scripts.js"></script>
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-274871-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/incsearch.js"></script>
+    <script src="./incsearch.js-サンプル3_テーブル表示、ページ遷移、列選択のサンプル_files/list.js"></script>
+    <script>
+      <!--
+        // wondowのonloadイベントに追加
+        // (listは、list.js内で定義している)
+        // wondowのonloadイベントに追加
+        var start = function(){
+          var status = document.getElementById('status');
+          new IncSearch.ViewTable(
+            'text',      // 入力が行われるエレメントのID
+            'view_area', // 検索結果を表示するエレメントのID
+            list,        // 検索対象のリスト
+            {dispMax: 10,  // オプション
+             startElementText: '<table class="table table-bordered"><tr><th width="20%">郵便番号</th><th width="80%">住所</th>',
+             searchBefore:
+               function(){
+                 status.innerHTML = 'search...';
+               },
+             searchAfter:
+               function(){
+                 var matchCount = this.matchList.length;
+                 var displayInfo = '';
+
+                 if (matchCount != 0) {
+                   var start = 1;
+                   var end   = this.dispMax;
+
+                   if (this.dispMax == 0 || end > matchCount) {
+                     end = matchCount;
+                   }
+                   displayInfo = '(<span id="display">' + start + 'から' + end + '</span>件まで表示)';
+                 }
+                 status.innerHTML = this.searchValues.length.toString() + '件中 '
+                                         + matchCount + '件ヒット ' + displayInfo;
+               },
+             changePageAfter:
+               function(pageNo){
+                 var matchCount = this.matchList.length;
+
+                 var start = (pageNo - 1) * this.dispMax + 1;
+                 var end   = start + this.dispMax - 1;
+
+                 if (end > matchCount) {
+                   end = matchCount;
+                 }
+
+                 var display = document.getElementById('display');
+                 display.innerHTML = start.toString() + 'から' + end; 
+               },
+             pageLink: 'page_link',
+             pagePrevName: '前ページ',
+             pageNextName: '次ページ',
+             moveRow: true,
+             selectRowCallback: function(rowData){setTimeout(function(){alert(rowData)}, 1);},
+             useHotkey: true});
+        };
+        window.addEventListener ?
+          window.addEventListener('load', start, false) :
+          window.attachEvent('onload', start);
+        //-->
+    </script>
+    
+  
+
+<div id="ext_session_alive_reload_prompt" style="display: none;"><div><div>To Keep Your Session Active<br>page will reload in <span id="session_live_reloader_countdown">30</span> seconds<br><a id="ext_session_alive_reload_rule_id" href="chrome-extension://lhobbakbeomfcgjallalccfhfcgleinm/settings.html" target="_rule_settings">Edit Rule<br></a></div><div><button type="button" id="ext_session_alive_reload_cancel">Wait 1 minute</button></div></div></div><span style="height: 20px; width: 40px; position: absolute; opacity: 1; z-index: 8675309; display: none; cursor: pointer; border: none; background-image: url(&quot;data:image/png;base64,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&quot;); background-color: transparent; background-size: 40px 20px;"></span><div id="UMS_TOOLTIP" style="position: absolute; cursor: pointer; z-index: 2147483647; top: -100000px; left: -100000px; background: transparent;"></div></body><umsdataelement id="UMSSendDataEventElement"></umsdataelement></html>

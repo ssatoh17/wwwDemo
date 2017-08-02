@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ForceDirected - Graph Operations</title>
+
+<!-- CSS Files -->
+<link type="text/css" href="ForceDirected-GraphOperations_files/base.css" rel="stylesheet">
+<link type="text/css" href="ForceDirected-GraphOperations_files/ForceDirected.css" rel="stylesheet">
+
+<!--[if IE]><script language="javascript" type="text/javascript" src="../../Extras/excanvas.js"></script><![endif]-->
+
+<!-- JIT Library File -->
+<script language="javascript" type="text/javascript" src="ForceDirected-GraphOperations_files/jit-yc.js"></script>
+
+<!-- Example File -->
+<script language="javascript" type="text/javascript" src="ForceDirected-GraphOperations_files/example2.js"></script>
+</head>
+
+<body onload="init();">
+<div id="container">
+
+<div id="left-container">
+
+
+
+        <div class="text">
+        <h4>
+Graph Operations    
+        </h4> 
+
+            In this (advanced) example a static graph is fed into the visualization.<br><br>
+            Custom Animations are triggered when clicking on a node's label or when deleting a node.<br><br>
+            <b>Click on a node's label</b> to select a node and its connections.<br><br>
+            <b>Click on the 'x' link</b> to delete a node.<br><br>
+            You can <b>drag nodes</b> around and <b>zoom</b> and <b>pan</b>, just like you did in the previous 
+            example.
+            
+            
+        </div>
+
+        <div id="id-list"></div>
+
+
+<div style="text-align:center;"><a href="http://philogb.github.io/jit/static/v20/Jit/Examples/ForceDirected/example2.code.html">See the Example Code</a></div>
+</div>
+
+<div id="center-container">
+    <div id="infovis"><div id="infovis-canvaswidget" style="position: relative; width: 600px; height: 600px;"><canvas id="infovis-canvas" width="600" height="600" style="position: absolute; top: 0px; left: 0px; width: 600px; height: 600px;"></canvas><div id="infovis-label" style="overflow: visible; position: absolute; top: 0px; left: 0px; width: 600px; height: 0px;"><div id="graphnode0" class="node" style="position: absolute; left: 234.5px; top: 236px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode0</span><span class="close">x</span></div><div id="graphnode1" class="node" style="position: absolute; left: 200.5px; top: 264px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode1</span><span class="close">x</span></div><div id="graphnode3" class="node" style="position: absolute; left: 182.5px; top: 328px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode3</span><span class="close">x</span></div><div id="graphnode2" class="node" style="position: absolute; left: 323.5px; top: 297px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode2</span><span class="close">x</span></div><div id="graphnode4" class="node" style="position: absolute; left: 138.5px; top: 143px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode4</span><span class="close">x</span></div><div id="graphnode10" class="node" style="position: absolute; left: 135.5px; top: 396px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode10</span><span class="close">x</span></div><div id="graphnode6" class="node" style="position: absolute; left: 259.5px; top: 372px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode6</span><span class="close">x</span></div><div id="graphnode11" class="node" style="position: absolute; left: 92.5px; top: 288px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode11</span><span class="close">x</span></div><div id="graphnode12" class="node" style="position: absolute; left: 312.5px; top: 335px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode12</span><span class="close">x</span></div><div id="graphnode13" class="node" style="position: absolute; left: 168.5px; top: 124px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode13</span><span class="close">x</span></div><div id="graphnode14" class="node" style="position: absolute; left: 292.5px; top: 140px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode14</span><span class="close">x</span></div><div id="graphnode15" class="node" style="position: absolute; left: 217.5px; top: 370px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode15</span><span class="close">x</span></div><div id="graphnode16" class="node" style="position: absolute; left: 320.5px; top: 359px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode16</span><span class="close">x</span></div><div id="graphnode17" class="node" style="position: absolute; left: 337.5px; top: 257px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode17</span><span class="close">x</span></div><div id="graphnode5" class="node" style="position: absolute; left: 301.5px; top: 397px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode5</span><span class="close">x</span></div><div id="graphnode7" class="node" style="position: absolute; left: 59.5px; top: 249px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode7</span><span class="close">x</span></div><div id="graphnode8" class="node" style="position: absolute; left: 81.5px; top: 187px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode8</span><span class="close">x</span></div><div id="graphnode9" class="node" style="position: absolute; left: 204.5px; top: 419px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode9</span><span class="close">x</span></div><div id="graphnode18" class="node" style="position: absolute; left: 380.5px; top: 162px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode18</span><span class="close">x</span></div><div id="graphnode19" class="node" style="position: absolute; left: 480.5px; top: 70px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode19</span><span class="close">x</span></div><div id="graphnode20" class="node" style="position: absolute; left: 374.5px; top: 25px;"><span class="name" style="font-size: 0.8em; color: rgb(221, 221, 221);">graphnode20</span><span class="close">x</span></div></div></div></div>    
+</div>
+
+<div id="right-container">
+
+<div id="inner-details"></div>
+
+</div>
+
+<div id="log" style="left: 482px;">done</div>
+</div>
+
+
+<div style="visibility: hidden; position: absolute; width: auto; height: auto;" class="jit-autoadjust-label"></div></body></html>

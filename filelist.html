@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!--ファビコンの指定-->
+        <link rel="SHORTCUT ICON" href="images/152px.png" />
+        <link rel="apple-touch-icon" href="https://dl.dropboxusercontent.com/u/591801/Photos/icon/152px.PNG">    
+        
+        <!--ローカルに必要-->
+<!--        <script src="./jquery.min.js"></script>-->
+        <script src="./jquery-3.1.1.min.js"></script>        
+        <!-- <script type="text/javascript" src="js/getResourceList.js"></script>-->
+        <script src="./getWebDavResourceList.js"></script>
+        <script src="./list.min.js"></script>
+
+        <title>WebDAVサーバ上のファイル・フォルダ一覧（絞込検索(インクリメンタルサーチ)、ソート機能つき）</title>
+
+        <!-- 検索ボックスにクリアボタンを追加するためのスタイル https://codepen.io/shidhincr/pen/ICLBD -->
+        <style>
+            .search-box,.close-icon,.search-wrapper {
+                position: relative;
+                padding: 10px;
+            }
+            .search-wrapper {
+/*                width: 500px;*/
+                margin: auto;
+                /* margin-top: 50px;*/
+            }
+            .search-box {
+/*                width: 80%;*/
+                width: 70%; /* 60%だとiPhoneでクリアボタンが消えてしまう・・・ */
+                border: 1px solid #ccc;
+              outline: 0;
+              border-radius: 10px;
+            }
+            .search-box:focus {
+                box-shadow: 0 0 15px 5px #b0e0ee;
+                border: 2px solid #bebede;
+            }
+            .close-icon {
+                border:1px solid transparent;
+                background-color: transparent;
+                display: inline-block;
+                vertical-align: middle;
+              outline: 0;
+              cursor: pointer;
+            }
+            .close-icon:after {
+                content: "X";
+                display: block;
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                background-color: #FA9595;
+                z-index:1;
+                right: 35px;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                padding: 2px;
+                border-radius: 50%;
+                text-align: center;
+                color: white;
+                font-weight: normal;
+                font-size: 12px;
+                box-shadow: 0 0 2px #E50F0F;
+                cursor: pointer;
+            }
+            .search-box:not(:valid) ~ .close-icon {
+                display: none;
+            }
+            
+            /*テーブル*/
+            table.type11 {
+                border-collapse: separate;
+                border-spacing: 1px;
+/*                text-align: center;*/
+/*                line-height: 1.5;*/
+                line-height: 1.1;
+            }
+            table.type11 th {
+                /* width: 155px;*/
+                padding: 10px;
+                font-weight: bold;
+/*                vertical-align: top;*/
+                vertical-align: middle;
+                color: #fff;
+                background: #036;
+            }
+            table.type11 button{
+                background: rgba(0, 0, 0, 0);
+                color: aliceblue;
+            }
+            table.type11 td {
+/*                width: 155px;*/
+                padding: 10px;
+                vertical-align: top;
+                border-bottom: 1px solid #ccc;
+                border:solid 1px #eee;
+                background: #eee;
+            }
+            /* 一列目 */
+            table.type11 tr td:nth-child(1) {
+                width:120px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        ディレクトリ、フォルダリスト以外にも情報を表示できるのがメリットか？→検索ボックスも追加できる。
+        <div style="font-size:30px;background-color:#ffcc66">&nbsp;フォルダ、ファイル一覧(WebDAVサーバ)</div>
+        <b>【機能】</b>
+        　・カタカナのファイル名、フォルダ名をひらがなでも検索できるようにしている（list.jsがtd要素内部の文字列全てを検索対象にしていることを利用<br>
+        <br>
+        ・更新日時順をデフォルトにしたい → 🔵既になっているはず<br>
+        ・URLに検索ワードを引数で与えられるようにしたい<br>
+        🔴🔵 tdタグの中に記載している文字列全てが対象（例：hrefのURL、独自属性(例：forSearch)も検索対象→
+        🔴 [ht]と入力すると、ハンパな絞込み結果になってしまう（aタグのhrefの文字列も検索対象になっていたためだった）<br>
+        🔴 インクリメンタルサーチ後、Enterを押さずにリストのリンクをクリックしても飛べない（テキストボックスが初期化されてしまっているため。Enterを押した後なら大丈夫）
+        済：<s>完了、一時、是正前のボタンを追加（一発絞込）</s><br>
+        済：<s>「改行」を押した時に、ソフトウェアキーボードを非表示にしたい→blurイベントで対応</s><br>
+        済：🔴 Safariだと、即時絞込してくれない（Backspaceを入れれば動く）（changeイベント時にsearchメソッドを実行することで対応
+        <div id="resources"> <!-- ← list.js のために必要-->
+            <div class="search-wrapper">
+                <form> <!-- formタグを入れないと、× をクリックしても消えなくなってしまう-->
+                    検索ワード：<input type="text" name="focus" required class="search-box search" placeholder="iPadの場合、入力後、キーボード右側の「改行」ボタンをタップ">
+                    <button type="reset" class="close-icon"></button>
+                    <input type="button" name="btnShowAll" value="全表示">
+                    <input type="text" name="EnterキーでSubmitさせないようにするためのもの" style="display:none;">
+                </form>
+                検索ワード候補：<input class="btnSearchWord" type="button" value="山積み">
+                <input class="btnSearchWord" type="button" value="一時">
+                <input class="btnSearchWord" type="button" value="是正前">
+                <input class="btnSearchWord" type="button" value="保存">
+            </div>
+        </div>
+
+        <!-- <input type="button" name="btnGetResourceList" value="ファイルリストの取得">-->
+
+        <script>
+            //$('input[name="btnGetResourceList"]').on('click',function(){getResourceList();});
+            var ua = navigator.userAgent;
+            var fromPC = false;
+            if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0) {
+                // スマートフォン用コード
+            } else if (ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0) {
+                // タブレット用コード
+            } else {
+                // PC用コード
+                fromPC = true;
+            }
+            
+            //var tdClassNames = ['no','displayName']; // tableのtdのclassで指定する文字列を指定（任意でOK）
+            var tdClassNames = ['No(更新日時順)','ファイル・フォルダ名','サイトへのリンク','コメント']; //★★tableのtdのclassで指定する文字列を指定
+            getResourceList("#resources",tdClassNames);                
+            var options = {valueNames: tdClassNames };
+            var userList = new List('resources', options); //table要素生成後に実施すること
+            
+            var hasEnterKeyPressed = false;
+            var hasTapResetButton = false;            
+
+            $('input[name="focus"]').keydown(function(e){
+                console.log("keydownイベント。keyCode = " + e.keyCode);
+                if(e.keyCode == 13){ //Enterキー
+                    hasEnterKeyPressed = true;
+                }
+            });
+            $('input[name="focus"]').keyup(function(e) {
+                console.log("keyupイベント。keycode = " + e.keyCode);
+                if(e.keyCode == 13){ //Enterキー
+                    hasEnterKeyPressed = true;
+                    //setTimeout(function(){
+                    //$(this).blur(); //基本はこれでchangeイベントが発生する。ただし、この時、直上のhasEnterKeyPressed は falseとして通知されてしまう・・・
+                    $(this).change(); //何故か発生しないケースがあるので、入れてみた
+                    //},1000);
+                }
+                //alert("keyupイベント！。$(this).val() = " + $(this).val());
+            });
+            
+                        
+            //$('input[name="focus"]').keyup(function(){
+            //何故か、「×」ボタンをクリックした時しか発生しない・・・
+            // IMEがオンの場合、日本語を入力してEnterキーを押した場合は、change(Enter押下直後の文字) → keyup → change
+            $('input[name="focus"]').change(function(e){
+                //console.log(e.metaKey);
+                //console.log(e.keyCode);
+               //userList.seach(); 
+                //userList.filter();
+                console.log("changeイベント$(this).val() = " + $(this).val() + " , hasEnterKeyPressed = " + hasEnterKeyPressed); //
+//                if($this.val()!="") $(this).val(""); //これを入れないと、changeを横取りしているせいか、クリアされない
+                //alert("リセットします。changeイベント$(this).val() = " + $(this).val());
+//                if(hasTapResetButton){
+//                    alert("hasTapResetButton = " + hasTapResetButton);
+//                    hasTapResetButton = false;
+                    if(hasEnterKeyPressed == false){
+                        $(this).val("");
+                    }else{
+                        //スマデバ（スマホ＋タブレット）ならば
+                        if(fromPC == false){
+                            $(this).blur(); //この直後、changeイベントが再度発生するはず
+                        }
+                    }
+                    hasEnterKeyPressed = false;                    
+                    userList.search($(this).val());
+//                if(hasTapResetButton){
+//                    userList.search();
+//                    alert("リセットしました")
+//                }
+//                }
+            });
+            
+            $('input[type=reset]').click(function(e){
+                //hasTapResetButton = true;                
+                e.preventDefault();
+                $(this).closest('form').get(0).reset(); //リセットを実行？                
+            });
+            
+            $('input[name="btnShowAll"]').click(function(){
+                $('input[name="focus"]').val("");
+                userList.search();     
+            });
+            $('.btnSearchWord').click(function(){
+                //検索用テキストボックスにワードを追加
+                //$('input[name="focus"]').val(""); //初期化（初回のみinputテキストボックスのプレースホルダの文字列が消えないため、その対策としてこの一行を入れたが、逆効果だった）
+                $('input[name="focus"]').val("空文字をセットしても、プレースホルダは消えない。プレースホルダは空文字の時に表示するものだから・・・");
+                $('input[name="focus"]').val($(this).val());
+                userList.search($('input[name="focus"]').val());
+            });
+
+            //指定Cookieの値の取得 http://so-zou.jp/web-app/tech/programming/javascript/cookie/#no7
+            function GetCookie(name)
+            {
+                var result = null;
+                //alert(name);
+
+                var cookieName = name + '=';
+                var allcookies = document.cookie;
+
+                var position = allcookies.indexOf( cookieName );
+                if( position != -1 )
+                {
+                    var startIndex = position + cookieName.length;
+
+                    var endIndex = allcookies.indexOf( ';', startIndex );
+                    if( endIndex == -1 )
+                    {
+                        endIndex = allcookies.length;
+                    }
+
+                    //result = decodeURIComponent(
+                    result = unescape(
+                        allcookies.substring( startIndex, endIndex ) );
+                }
+
+                return result;
+            };
+                                    
+            $('input[name="focus"]').focus();
+            
+        </script>
+        
+<!-- <span class="searchword">折りたたみ</span>展開ボタン -->
+<div onclick="obj=document.getElementById('menu1').style; obj.display=(obj.display=='none')?'block':'none';">
+    <a style="cursor:pointer;">【更新履歴】▼ クリックで展開</a>
+</div>
+<!-- ここから先を折りたたむ -->
+<div id="menu1" style="display:none;clear:both;"> 
+     <!--この部分が折りたたまれ、展開ボタンをクリックすることで展開します。-->
+　ver 0.5.1（2017-03-26）コメントを表示できるようにした（外部ファイル「コメント一覧.txt」をリソース一覧表に反映させられるようにした）<br>
+　ver 0.5.0（2017-03-26）index.htmlへのリンクを追加（index.htmlがあろうが無かろうが表示している）<br>
+　ver 0.4.9（2017-03-26）このファイルで列名を指定するだけで、列を追加できるようにした（検索対象にもなるようにした）<br>
+　ver 0.4.8（2017-03-26）ファイル名の変更（getWebDavResourceList.jsに）<br>
+</div><!-- ここまでを折りたたむ -->
+        
+    </body>
+</html>

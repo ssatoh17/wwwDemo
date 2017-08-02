@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://kitasenjudesign.com/test/1206/sin/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>flag</title>
+<style type="text/css">
+    body{
+        margin:0px;
+        padding:0px;
+        background-color:#000;   
+    }
+</style>
+    
+<script src="./flag_files/three.min.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+<body style="background-color:#000000" data-pinterest-extension-installed="cr1.39.2" cz-shortcut-listen="true">
+
+<script>
+
+var scene, camera, renderer;
+var startTime = new Date();
+var angle = 0;
+var plane;
+var SEGX=32;
+var SEGY=32;
+window.onload = init;
+
+function init() {
+
+    //scene
+    scene = new THREE.Scene();
+	
+    //camera
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 14000);
+    camera.position.set(0,0,1000);
+	camera.lookAt(new THREE.Vector3(0,0,0));
+	scene.add(camera);
+    
+    //render
+	renderer = new THREE.WebGLRenderer({antialias: true});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+    
+    //light
+    var light = new THREE.PointLight(0xffffff,2);
+    light.position.set(100,0,300);
+    scene.add(light);
+    
+    //Planeをつくる
+    var texture = THREE.ImageUtils.loadTexture('./flag_files/top_image.jpg');
+    var geometry = new THREE.PlaneGeometry(1300, 1228, SEGX, SEGY);
+    var material = new THREE.MeshLambertMaterial({map:texture});
+    plane = new THREE.Mesh(geometry, material);
+    scene.add(plane);   
+    
+	render();
+	window.addEventListener("resize", resize, false);
+}
+    
+function render() {
+    
+    var time = (new Date() - startTime)/1000;
+    plane.geometry.verticesNeedUpdate=true;
+    for (var i=0;i<SEGX+1;i++) {
+		for (var j=0;j<SEGY+1;j++) {
+			var index = j * (SEGX + 1) + i % (SEGX + 1);
+            var vertex = plane.geometry.vertices[index];
+			vertex.z = 100 * Math.sin( -i/2 + time*10 );
+		}			
+	}
+    
+	renderer.render(scene, camera);
+    
+    requestAnimationFrame(render);
+}
+    
+function resize(event) {
+	camera.aspect = window.innerWidth/window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+}
+</script>
+
+<canvas>
+<!--<canvas width="2362" height="1406" style="width: 1181px; height: 703px;">-->
+
+</canvas>
+<div id="ext_session_alive_reload_prompt" style="display: none;"><div><div>To Keep Your Session Active<br>page will reload in <span id="session_live_reloader_countdown">30</span> seconds<br><a id="ext_session_alive_reload_rule_id" href="chrome-extension://lhobbakbeomfcgjallalccfhfcgleinm/settings.html" target="_rule_settings">Edit Rule<br></a></div><div><button type="button" id="ext_session_alive_reload_cancel">Wait 1 minute</button></div></div></div><div id="UMS_TOOLTIP" style="position: absolute; cursor: pointer; z-index: 2147483647; background: transparent; top: -100000px; left: -100000px;"></div></body><umsdataelement id="UMSSendDataEventElement"></umsdataelement></html>

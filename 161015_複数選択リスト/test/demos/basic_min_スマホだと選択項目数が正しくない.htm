@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery MultiSelect Widget Demo</title>
+<link rel="stylesheet" type="text/css" href="../jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="assets/style.css" />
+<link rel="stylesheet" type="text/css" href="assets/prettify.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="assets/prettify.js"></script>
+<script type="text/javascript" src="../src/jquery.multiselect.js"></script>
+
+<script type="text/javascript">
+    //$(function(){
+    //	$("select").multiselect();
+    //});
+    $(document).ready(function(){
+    //alert("aaa");
+       $("#example").multiselect({
+           header: true,
+           height: 175,
+           minWidth: 225,
+           checkAllText:"すべて",
+           uncheckAllText:"未選択",
+           noneSelectedText:"未選択です",
+           selectedText:"# 個選択",
+           //selectedList: 3, //Max項目？？
+           //アニメーション（show,hide)
+           //show:['bounce',500],
+           //hide:['drop',500],
+           autoopen:false,
+           multiple:true,
+           classes:'.multi__etc',
+           //表示位置
+//           position:{
+//                my:'center',
+//                at:'center'
+//           }
+       });
+    });
+</script>
+</head>
+<body id="test" onload="prettyPrint();">
+
+<h2>Basic Demos</h2>
+<p>Both multiselects are created with the following one-liner.  Optgroup support is built in out of the box:</p>
+<pre class="prettyprint">
+$(function(){
+   $("select").multiselect(); 
+});
+</pre>
+
+<h3>Basic</h3>
+<p>
+    <select id="example" name="example" multiple="multiple">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+        <option value="6">あああ</option>
+    </select>
+    
+    <button type="button" class="ui-multiselect ui-widget ui-state-default ui-corner-all" aria-haspopup="true" style="width: 225px;"><span class="ui-icon ui-icon-triangle-1-s"></span><span>未選択です</span></button>
+    
+    <p>
+    <select multiple="multiple" size="10" class="ui-multiselect" style="display: none;">
+        <option value="1">Option value 1</option>
+        <option value="2">Option value 2</option>
+        <option value="3">Option value 3</option>
+        <option value="4">Option value 4</option>
+        <option value="5">Option value 5</option>
+        <option value="6">Option value 6</option>
+        <option value="7">Option value 7</option>
+    </select>
+    <button type="button" class="ui-multiselect ui-widget ui-state-default ui-corner-all" aria-haspopup="true" style="width: 225px;"><span class="ui-icon ui-icon-triangle-2-n-s"></span><span>選択してください</span>
+    </button>
+    </p>
+    
+    
+    <div class="ui-multiselect-menu ui-widget ui-widget-content ui-corner-all" style="width: 217px; top: 98.875px; left: 8px; display: none;"><div class="ui-widget-header ui-corner-all ui-multiselect-header ui-helper-clearfix"><ul class="ui-helper-reset"><li><a class="ui-multiselect-all" href="#"><span class="ui-icon ui-icon-check"></span><span>Check all</span></a></li><li><a class="ui-multiselect-none" href="#"><span class="ui-icon ui-icon-closethick"></span><span>Uncheck all</span></a></li><li class="ui-multiselect-close"><a href="#" class="ui-multiselect-close"><span class="ui-icon ui-icon-circle-close"></span></a></li></ul></div><ul class="ui-multiselect-checkboxes ui-helper-reset" style="height: 175px;"><li class=" "><label for="ui-multiselect-0-option-0" title="" class="ui-corner-all ui-state-hover"><input id="ui-multiselect-0-option-0" name="multiselect_0" type="checkbox" value="1" title="Option value 1"><span>Option value 1</span></label></li><li class=" "><label for="ui-multiselect-0-option-1" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-1" name="multiselect_0" type="checkbox" value="2" title="Option value 2" aria-selected="true"><span>Option value 2</span></label></li><li class=" "><label for="ui-multiselect-0-option-2" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-2" name="multiselect_0" type="checkbox" value="3" title="Option value 3" aria-selected="true"><span>Option value 3</span></label></li><li class=" "><label for="ui-multiselect-0-option-3" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-3" name="multiselect_0" type="checkbox" value="4" title="Option value 4" aria-selected="true"><span>Option value 4</span></label></li><li class=" "><label for="ui-multiselect-0-option-4" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-4" name="multiselect_0" type="checkbox" value="5" title="Option value 5"><span>Option value 5</span></label></li><li class=" "><label for="ui-multiselect-0-option-5" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-5" name="multiselect_0" type="checkbox" value="6" title="Option value 6" aria-selected="true"><span>Option value 6</span></label></li><li class=" "><label for="ui-multiselect-0-option-6" title="" class="ui-corner-all"><input id="ui-multiselect-0-option-6" name="multiselect_0" type="checkbox" value="7" title="Option value 7"><span>Option value 7</span></label></li></ul></div>
+    
+    <div id="UMS_TOOLTIP" style="position: absolute; cursor: pointer; z-index: 2147483647; background: transparent; top: -100000px; left: -100000px;"></div>
+    
+
+<h3>With Optgroups</h3>
+<p>Click on an optgroup's heading to toggle the checked state of the entire group.</p>
+<p>
+	<select name="example-optgroup" multiple="multiple" size="5">
+	<optgroup label="Group One">
+		<option value="option1">Option 1</option>
+		<option value="option2">Option 2</option>
+		<option value="option3">Option 3</option>
+	</optgroup>
+	<optgroup label="Group Two">
+		<option value="option4">Option 4</option>
+		<option value="option5">Option 5</option>
+		<option value="option6">Option 6</option>
+		<option value="option7">Option 7</option>
+	</optgroup>
+	</select>
+</p>
+
+</body>
+</html>

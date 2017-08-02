@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width,initial-scale=1">      
+       <title>空行の扱いを拡張10</title>
+   </head>         
+   <body>
+       <input type="button" onclick="showAllElements();" value="全て表示(展開)">
+       <input type="button" onclick="collapseAllElements();" value="全て折り畳む(1階層目のみ表示)">
+<input type="button" onclick="showPartElements(1);" value="2階層目まで表示">
+<input type="button" onclick="showPartElements(2);" value="3階層目まで表示">
+<h2>空行の扱いを拡張10</h2>
+   <div onclick="obj=document.getElementById('open0').style;obj.display=(obj.display=='none')?'block':'none';var a=document.getElementById('a0');a.innerHTML=(obj.display=='none')?a.innerHTML.replace('⊖','⊕'):a.innerHTML.replace('⊕','⊖');">
+                                              <a id="a0" style="cursor:pointer;">⊕ <span style="font-size:19px;"></span>１
+        </a>
+    </div>
+    <div style="margin-left:30px">
+        <div id="open0" class="1" style="display:none;clear:both;">
+<span style="font-size:19px;">　</span>１－１A<br>
+<span style="font-size:19px;">　</span>１－１B<br>
+   <div onclick="obj=document.getElementById('open1').style;obj.display=(obj.display=='none')?'block':'none';var a=document.getElementById('a1');a.innerHTML=(obj.display=='none')?a.innerHTML.replace('⊖','⊕'):a.innerHTML.replace('⊕','⊖');">
+                                              <a id="a1" style="cursor:pointer;">⊕ <span style="font-size:19px;"></span>１－２
+        </a>
+    </div>
+    <div style="margin-left:30px">
+        <div id="open1" class="2" style="display:none;clear:both;">
+<span style="font-size:19px;">　</span>１－２－１<br>
+<span style="font-size:19px;">　</span>１－２－３<br>
+
+</div>
+</div>
+<span style="font-size:19px;">　</span>１－３<br>
+
+</div>
+</div>
+<span style="font-size:19px;">　</span><br>
+<span style="font-size:19px;">　</span>２<br>
+<span style="font-size:19px;">　</span><br>
+   <div onclick="obj=document.getElementById('open2').style;obj.display=(obj.display=='none')?'block':'none';var a=document.getElementById('a2');a.innerHTML=(obj.display=='none')?a.innerHTML.replace('⊖','⊕'):a.innerHTML.replace('⊕','⊖');">
+                                              <a id="a2" style="cursor:pointer;">⊕ <span style="font-size:19px;"></span>３
+        </a>
+    </div>
+    <div style="margin-left:30px">
+        <div id="open2" class="1" style="display:none;clear:both;">
+   <div onclick="obj=document.getElementById('open3').style;obj.display=(obj.display=='none')?'block':'none';var a=document.getElementById('a3');a.innerHTML=(obj.display=='none')?a.innerHTML.replace('⊖','⊕'):a.innerHTML.replace('⊕','⊖');">
+                                              <a id="a3" style="cursor:pointer;">⊕ <span style="font-size:19px;"></span>３－１
+        </a>
+    </div>
+    <div style="margin-left:30px">
+        <div id="open3" class="2" style="display:none;clear:both;">
+<span style="font-size:19px;">　</span>３－１－１<br>
+
+</div>
+</div>
+<span style="font-size:19px;">　</span>３－２<br>
+<span style="font-size:19px;">　</span>３－３<br>
+
+</div>
+</div>
+<span style="font-size:19px;">　</span><br>
+<span style="font-size:19px;">　</span>４<br>
+<span style="font-size:19px;">　</span><br>
+<span style="font-size:19px;">　</span><br>
+<span style="font-size:19px;">　</span><br>
+      <script type="text/javascript">
+           function showAllElements(){
+                //全ての要素を展開、折りたたみする
+                for (var n = 0; n<4;n++)
+                {
+                    var obj = document.getElementById('open' + n).style;
+                    obj.display = 'block';
+                    var a = document.getElementById('a' + n);
+                    a.innerHTML = a.innerHTML.replace('⊕', '⊖');
+                }
+            };
+            function collapseAllElements(){
+                for (var n=0; n<4;n++)
+                {
+                    var obj = document.getElementById('open' + n).style;
+                    obj.display = 'none';
+                    var a = document.getElementById('a' + n);
+                    a.innerHTML = a.innerHTML.replace('⊖', '⊕');
+                }
+            };
+            function showPartElements(indentNum){
+                collapseAllElements();    //初期化
+                for(var n=0; n <4;n++){             
+                    var elm=document.getElementById('open' + n);    
+                    var obj=document.getElementById('open' + n).style;
+                    if(elm.hasAttribute('class')){
+                        if(elm.getAttribute('class')<=indentNum){
+                            obj.display='block';
+                            var a=document.getElementById('a'+n);
+                            a.innerHTML=a.innerHTML.replace('⊕','⊖');                        
+                        }
+                    }
+                }       
+             }
+      </script>
+   </body>
+</html>

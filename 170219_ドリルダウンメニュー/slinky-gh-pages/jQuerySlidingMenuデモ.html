@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+	<title>Slinky-jQuery sliding menu スライディングメニュー（ドリルダウンメニュー）デモ</title>
+
+    <link rel="stylesheet" href="master.css?v3">
+<!--	<link rel="stylesheet" href="dist/jquery.slinky.css?v3">-->
+	<link rel="stylesheet" href="dist/jquery.slinky.css">
+</head>
+
+<body>
+	<div class="wrapper">
+
+        <header>
+			<h1>Slinky（スリンキー？？）</h1>
+			<h2>jQuery sliding menu（ドリルダウン型のプルダウンメニュー）</h2>
+			<p>A light-weight, responsive, mobile-like navigation menu plugin</p>
+            <pre>
+必要なファイルは４つ。
+　１．jquery.slinky.js
+　２．master.css?v3 ← ファイル名には、?v3は含まれない
+　３．jquery.slinky.css?v3
+　４．jquery.js
+    （https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js）
+            </pre>
+            
+		</header>
+        
+		<section>            
+			<h3>Demo</h3>
+            <span id="floorNum">選択したの要素</span>
+			<div id="menu" class="slinky-menu">                
+				<ul class="menu">                    
+					<li>
+<!--						<a href="https://designplox.com/">I'm an external URL（外部リンク）</a>-->
+						<a id="aSelectFloorNum">フロアを選択</a>
+					</li>
+					<li>
+						<a href="#">1F</a>
+						<ul>
+							<li>
+								<a href="#">101</a>
+								<ul>
+									<li>
+										<a href="#">101-1</a>
+										<ul>
+											<li>
+												<a href="#">Train Kept A-Rollin'</a>
+											</li>
+											<li>
+												<a href="#">Same Old Song and Dance</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">102</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+										<ul>
+											<li>
+												<a href="#">Hotel California</a>
+											</li>
+											<li>
+												<a href="#">Pretty Maids All in a Row</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">103</a>
+								<ul>
+									<li>
+										<a href="#">Physical Graffiti</a>
+										<ul>
+											<li>
+												<a href="#">In My Time of Dying</a>
+											</li>
+											<li>
+												<a href="#">Houses of the Holy</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+                                                
+						<a href="#">Albums</a>
+						<ul>
+							<li>
+								<a href="#">Get Your Wings</a>
+								<ul>
+									<li>
+										<a href="#">Train Kept A-Rollin'</a>
+									</li>
+									<li>
+										<a href="#">Same Old Song and Dance</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Hotel California</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+									</li>
+									<li>
+										<a href="#">Pretty Maids All in a Row</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Physical Graffiti</a>
+								<ul>
+									<li>
+										<a href="#">In My Time of Dying</a>
+									</li>
+									<li>
+										<a href="#">Houses of the Holy</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    
+                    </li>
+					<li>
+                        
+						<a href="#">Songs</a>
+						<ul>
+							<li>
+								<a href="#">In My Time of Dying</a>
+							</li>
+							<li>
+								<a href="#">Houses of the Holy</a>
+							</li>
+							<li>
+								<a href="#">Hotel California</a>
+							</li>
+							<li>
+								<a href="#">Pretty Maids All in a Row</a>
+							</li>
+							<li>
+								<a href="#">Train Kept A-Rollin'</a>
+							</li>
+							<li>
+								<a href="#">Same Old Song and Dance</a>
+							</li>
+						</ul>
+					
+                    </li>
+					<li>
+                        
+						<a href="#">Genres</a>
+						<ul>
+							<li>
+								<a href="#">Rock</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+									</li>
+									<li>
+										<a href="#">Pretty Maids All in a Row</a>
+									</li>
+									<li>
+										<a href="#">Train Kept A-Rollin'</a>
+									</li>
+									<li>
+										<a href="#">Same Old Song and Dance</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Hard rock</a>
+								<ul>
+									<li>
+										<a href="#">In My Time of Dying</a>
+									</li>
+									<li>
+										<a href="#">Houses of the Holy</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    </li>
+					<li>
+                        
+						<a href="#">Settings</a>
+						<ul>
+							<li>
+								<a href="#">Profile</a>
+							</li>
+							<li>
+								<a href="#">Player</a>
+								<ul>
+									<li>
+										<a href="#">Volume</a>
+									</li>
+									<li>
+										<a href="#">Equalizer</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    </li>                    
+				</ul>
+                最下部（div内）
+			</div>
+            最下部（div外）
+		</section>
+        
+        
+	</div>
+	<footer>
+	</footer>
+</body>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="dist/jquery.slinky.js"></script>
+<script>
+	$(document).ready(function() {
+//		$('#menu').slinky({
+//			title: true,
+//		});
+        //$('.menu li').hover(function(){
+//        $('.menu>li').hover(function(){
+//            $("ul:not(:animated)", this).slideDown();
+//        }, function(){
+//            //$("ul.child",this).slideUp();
+//        });
+        
+        //メニューを非表示にする
+//        for(var i=1;i<$('ul.menu').children(1).length;i++){
+//            $('ul.menu').children(1).eq(i).hide();                        
+//        }
+        
+        for(var i=1;i<$('ul.menu').children().length;i++){
+            $('ul.menu').children().eq(i).hide();                        
+        }
+        
+		var slinky = $('#menu').slinky({
+			title: true,
+            label: "戻る",
+		});
+                
+        //$('a').click(function(event){
+        //ul.menu の孫要素のみで表示
+        $('ul.menu>li>ul>li>a').click(function(event){
+            if($(this).text()!="戻る"){
+                console.log($(this).text());
+                //2階層目をクリックした時のみ、テキストを取得してliを全て非表示
+                $('#floorNum').text($(this).text());
+                //「今表示されているBack」をクリック
+                //$('a.back').click();
+                //親の親の子のli.headerの子要素のa.back
+                //console.log($(this).parent().parent().children(1).eq(0).children(0).eq(0));
+            //console.log($(this).parent().parent().children(1).eq(0).children(0).eq(0).children(0).eq(1));
+            console.log($(this).parent().parent().children(0).eq(0)); //liのheder
+            console.log($(this).parent().parent().children(0).eq(0).children(0).eq(1)); // console.log($(this).parent().parent().children(1).eq(0).children(0).eq(0).children(0).eq(2));
+            //console.log($(this).parent().parent().children(0).eq(0).children(0).eq(1)); //「Back」をクリックしているが戻らない
+            
+            //slinky.destroy(); //初期化
+            //slinky = null;
+                slinky.home(); //ホームに戻る
+            for(var i=1;i<$('ul.menu').children().length;i++){
+                $('ul.menu').children().eq(i).hide();    
+                //$('ul.menu').height = $('ul.menu').height - $('ul.menu').children().eq(i).height;
+            }
+            $('#menu').height = $('ul.menu').height;
+//                
+//                slinky = $('#menu').slinky({
+//                    title: true,
+//                    label: "戻る",
+//                });
+                //$('ul.menu').children().eq(0).show();                        
+                //メニューを非表示にする
+                //for(var i=2;i<$('ul.menu').children(1).length;i++){
+//                for(var i=1;i<$('ul.menu').children().length;i++){
+//                    //$('ul.menu').children(1).eq(i).hide();   
+//                    $('ul.menu').children().eq(i).hide();   
+//                }
+//                $('#menu').height = 36;
+                //slinky.home(); //ホームに戻る
+                //$('ul.menu').addClass("active");
+                //slinky.jump();
+//                for(var i=1;i<$('ul.menu').children(1).length;i++){
+//                    $('ul.menu').children(1).eq(i).show();  
+//                    console.log("show()を実行");
+//                    for(var j=0; j<$('ul.menu').children(1).eq(i).children().length;j++){
+//                        $('ul.menu').children(1).eq(i).children().eq(j).show();
+//                    }
+//                }
+
+            }
+            //$(this).parent().parent().children(1).eq(0).children(0).eq(0).children(0).eq(1).click();
+            //$(this).parent().parent().children(1).eq(0).children(0).eq(0).children(0).eq(2).click();
+        });
+        $('#aSelectFloorNum').click(function(){
+            console.log("clickされました！$('ul.menu').children(1)の要素数は、" + $('ul.menu').children(1).length);
+            for(var i=1;i<$('ul.menu').children(1).length;i++){
+                //$('ul.menu').children(1).eq(i).show();  
+                $('ul.menu').children().eq(i).show();  
+                console.log("show()を実行");
+//                for(var j=0; j<$('ul.menu').children(1).eq(i).children().length;j++){
+//                    $('ul.menu').children(1).eq(i).children().eq(j).show();
+//                }
+            }
+            //$('#menu').height = 500;
+        });
+        
+        //console.log($('ul.menu').eq(1));
+        
+	});
+</script>
+
+    
+</html>

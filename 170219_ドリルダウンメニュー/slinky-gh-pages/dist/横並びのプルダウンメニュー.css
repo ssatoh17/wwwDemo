@@ -1,0 +1,42 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+/*ul#menu li{*/
+ul.menu li{
+    float: left;
+    position: relative;
+    margin: 0;
+    padding: 5px;
+/* 200pxだと、スマホで２行になってしまい、プルダウンメニューが隠れてしまった*/
+/*    width: 200px; */
+    width: 100px;
+    background-color: #555555;
+    display: block;
+/*    display: none;*/
+}
+ul.child{
+    display: none;
+    position: absolute;
+    margin-left: -5px;
+    padding: 0;
+}
+ul.child li a{
+    padding: 5px 10px;
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: -5px;
+    display: block;
+    color: #fff;
+}
+li a:hover{
+    background: #ff0000;
+}
+
+/*
+ul.menu>li{
+    display: none; !important
+}
+*/

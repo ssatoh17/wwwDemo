@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0031)http://hakuhin.jp/js/audio.html -->
+<html lang="ja-JP" style="height: 100%;">
+    <div class="oneNoteWebClipperIsInstalledOnThisBrowser" style="display: none;"></div>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="author" content="hakuhin">
+	<meta name="language" content="Japanese">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="keywords" content="JavaScript,Audio">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--	<meta name="google-translate-customization" content="a48485daf0578662-0247ae5623b4ea71-g0a1657ec1a99ac56-a">-->
+
+	<link rel="shortcut icon" href="http://hakuhin.jp/icon/js.ico" type="image/vnd.microsoft.icon">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/js.css">
+<!--	<link rel="author" href="https://plus.google.com/113623142701014539697">-->
+	<script src="./js/ca-pub-2028288171521864.js"></script>
+<!--    <script async="" src="./js/analytics.js"></script>-->
+    <script type="text/javascript" src="./js/main.js"></script>
+
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+	<!--[if lte IE 7.0]><link rel="stylesheet" type="text/css" href="../css/ie.css"><![endif]-->
+
+
+	<title>音声ファイルプレーヤー ver 1.0.0(2016/12/30)</title>
+
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="./css/translateelement.css">
+    <script type="text/javascript" charset="UTF-8" src="./js/main_ja.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./js/element_main.js"></script>
+    
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style>
+    
+</head>
+    
+    
+<body class="body" data-pinterest-extension-installed="cr2.0.5" style="position: relative; min-height: 100%; top: 0px; transition: 0.6s ease-in-out;" cz-shortcut-listen="true">
+
+
+<div id="out" style="left: 0px;">
+
+<div id="main">
+
+<script type="text/javascript" src="./js/index.js" async=""></script>
+
+<div class="world">
+
+<div class="bg">
+
+    <input type="button" id="btnPlayAt20sec" value="20秒から再生">
+
+<script type="text/javascript">
+    <!--
+HH_WriteSampleForJavaScript("\<input id=\"edit_02_url\" style=\"width:100%;\"\>\</input\>\<br\>\n\<input type=\"button\" id=\"button_02_load\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"読み込み\"\>\n\<input type=\"button\" id=\"button_02_play\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"再生\"\>\n\<input type=\"button\" id=\"button_02_pause\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"一時停止\"\>\n\<input type=\"button\" id=\"button_02_stop\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"停止\"\>\<br\>\n\n\<input type=\"range\" id=\"edit_02_slider\" style=\"width:100%;\" min=\"0\" max=\"1.0\" step=\"0.00001\" value=\"0.0\"\>\</input\>\<br\>\n\n\<div style=\"width:100%; margin:0px 0px 10px 0px;\"\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>自動再生:\<input type=\"checkbox\" id=\"input_02_autoplay\" checked\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>ループ:\<input type=\"checkbox\" id=\"input_02_loop\"\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>再生速度:\<input type=\"button\" id=\"btnMinus2\" value=\"－－\"\>\<input type=\"button\" id=\"btnMinus\" value=\"－\"\>\<input type=\"number\" id=\"input_02_rate\" value=\"2.5\" min=\"-10.0\" max=\"10.0\" step=\"0.01\"\>\<input type=\"button\" id=\"btnPlus\" value=\"＋\"\>\<input type=\"button\" id=\"btnPlus2\" value=\"＋＋\"\>\<input type=\"button\" id=\"btnRateReset\" value=\"ﾘｾｯﾄ\"\>\</span\>\n\</div\>\nリザルト進捗:\<br\>\n\<textarea id=\"edit_02_result\" style=\"width:100%; height:100px; margin:0px 0px 5px 0px;\" disabled\>\</textarea\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\t// AudioElement を作成\n\tvar audio = new Audio();\n\n\t// オーディオのイベント\n\taudio.addEventListener(\"timeupdate\",function (e){\n\t\t// スライダーを更新\n\t\telement_slider.max = audio.duration;\n\t\telement_slider.value = audio.currentTime;\n\t},false);\n\n\t// 各エレメントを取得\n\tvar element_url = document.getElementById(\"edit_02_url\");\n\tvar element_slider = document.getElementById(\"edit_02_slider\");\n\tvar element_rate = document.getElementById(\"input_02_rate\");\n\tvar element_autoplay = document.getElementById(\"input_02_autoplay\");\n\tvar element_loop = document.getElementById(\"input_02_loop\");\n\tvar element_result = document.getElementById(\"edit_02_result\");\n\n\tvar element;\n\t\n\t// 読み込みボタンの element を取得\n\telement = document.getElementById(\"button_02_load\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\t// 送信したい URL 先\n\t\tvar url = element_url.value;\n\n\t\t// URL アドレスをセット\n\t\taudio.src = url;\n\n\t\t// 読み込み開始\n\t\taudio.load();\n\t};\n\n\n\t// 再生ボタンの element を取得\n\telement = document.getElementById(\"button_02_play\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.play();\n\t};\n\n\n\t// 一時停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_pause\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.pause();\n\t};\n\n\n\t// 停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_stop\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.currentTime = 0;\n\t\taudio.pause();\n\t};\n\n\n\t// 60 fps 間隔で実行する\n\tsetInterval(function (){\n\t\tvar v;\n\t\tv = element_rate.value;\n\t\taudio.playbackRate = v;\n\n\t\tv = element_autoplay.checked;\n\t\taudio.autoplay = v;\n\n\t\tv = element_loop.checked;\n\t\taudio.loop = v;\n\n\t\t// リザルトを更新\n\t\tvar s = \"\";\n\t\ts += \"currentTime:\" + audio.currentTime + \"\\n\";\n\t\ts += \"duration(長さ(秒)):\" + audio.duration + \"\\n\";\n\t\ts += \"paused:\" + audio.paused + \"\\n\";\n\t\ts += \"seeking:\" + audio.seeking + \"\\n\";\n\t\ts += \"readyState:\" + audio.readyState + \"\\n\";\n\t\telement_result.value = s;\n\n\t},1000/60);\n\t\n\t\n\t// スライダー変更時に実行されるイベント\n\telement_slider.onchange = function (){\n\t\taudio.currentTime = this.value;\n\t};\n\n\t// サーバ側で用意しているサウンドファイルのリスト\n\tvar audio_file_list = [\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.m4a\" , type:\"audio/mp4\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.mp3\" , type:\"audio/mpeg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.ogg\" , type:\"audio/ogg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.wav\" , type:\"audio/wav\"}\n\t];\n\t\n\t// サポートしているコンテンツタイプを調べてデフォルト URL を設定する\n\tvar i;\n\tvar num = audio_file_list.length;\n\tfor(i=0;i\<num;i++){\n\t\tif(audio.canPlayType(audio_file_list[i].type) !== \"\"){\n\t\t\telement_url.value = audio_file_list[i].url;\n\t\t\tbreak;\n\t\t}\n\t}\n})();\n//--\>\n\</script\>");
+//-->
+</script>
+
+    <div class="js_sample">
+
+        <table id="tableForPipe">
+            <tr><td>左から３列目（「秒」の列）をクリックすると、その位置にジャンプします。</td></tr>
+            <tr><td>絞込みワードには、正規表現も使えます。例:「キーワード１.*キーワード２」</td></tr>
+        </table>
+
+        <script type="text/javascript" src="js/jquery.csv2table-0.02-b-4.8.js"></script>
+
+        <script>
+
+            var audio = new Audio();
+
+            $(function(){
+              
+                $('#table_disp').csv2table('./list.csv');
+                console.log("csvを表形式で表示しました");
+
+                init();
+
+                //再生速度の変更ボタンのイベントリスナの登録
+                $("#btnRateReset").bind('click', function(){
+                    $("#input_02_rate").val(1);            
+                });
+                $("#btnMinus").bind('click', function(){
+                    var _val = parseFloat($("#input_02_rate").val());
+                    $("#input_02_rate").val(_val - 0.1);
+                });
+                $("#btnPlus").bind('click', function(){
+                    var _val = parseFloat($("#input_02_rate").val());
+                    $("#input_02_rate").val( _val + 0.1);            
+                });
+                $("#btnMinus2").bind('click', function(){
+                    var _val = parseFloat($("#input_02_rate").val());
+                    $("#input_02_rate").val(_val - 1);
+                });
+                $("#btnPlus2").bind('click', function(){
+                    var _val = parseFloat($("#input_02_rate").val());
+                    $("#input_02_rate").val( _val + 1);            
+                });
+
+                $("#tableForPipe").bind('click', function(){
+                    console.log("111");
+                    // ページ読み込み時にはclickイベントをbindできなかったので、読み込んでから少し経ってからbindメソッド（イベントリスナの追加）を実行
+                    $("table.csv2table-table td").bind('click', function(){
+                        $tag_td = $(this)[0];
+                        $tag_tr = $(this).parent()[0];
+                        console.log("クリックしたのは %s列, %s行", $tag_td.cellIndex, $tag_tr.rowIndex);
+                        //console.log($tag_td.innerHTML);
+                        // NaNでなかったら（＝ 数値なら）、値をセットする
+                        if(isNaN(parseInt($tag_td.innerHTML))){
+                        }
+                        else{
+                            audio.currentTime = parseInt($tag_td.innerHTML);
+                            console.log($tag_td.innerHTML);
+                        }
+                    });
+                });
+                
+
+                $("#button_02_load").click(); //再生
+
+                setTimeout(function(){
+                    $('#tableForPipe').click();
+                },2000);
+                
+                //ボタン「絞り込む」
+                $('#btnFilter').bind("click",function(){
+                    //正規表現
+                    var re = new RegExp($('#txtSearch').val()); //例：両端一致の場合は、「.*」を使う
+                    var i = 0;
+                    //class が csv2table-table のテーブルの全ての行を走査
+                    $('table.csv2table-table tbody tr').each(function(){
+                        i++;
+                        if(i==1) { //ヘッダ行の場合
+                            $(this).show(); //ヘッダ行を表示したい場合（表示したくない場合はコメントアウト
+                            return true; //ヘッダー行は読み飛ばす
+                        }
+                        
+                        //現在の行の全てのセルについて、全てのセルの内容をチェックする（検索列を固定したい場合は、$(this).find('td:eq(1)') 等とする（左から２列目のみの検索の場合）
+                        var tds = $(this).find('td'); //直下のみの検索でいいなら、find ではなく、childメソッドを使う http://kihon-no-ki.com/difference-between-find-and-children-in-jquery
+                        var isMatched = false;
+                        for(var j=0; j < tds.length; j++){
+                            //var txt = tds(j).html();  // 🔴 間違い
+                            var txt = tds.eq(j).html(); // 🔵 正しい
+                            if(txt.match(re) != null){
+                                isMatched = true;
+                            }
+                        }
+                        //Matchした行のみを表示する
+                        if(isMatched){
+                            $(this).show();
+                        }else{
+                            $(this).hide();
+                        }
+                    });
+                });
+                //「全行表示」ボタン
+                $("#btnShowAllRows").bind('click', function(){
+                    $('table.csv2table-table tbody tr').each(function(){
+                        $(this).show();
+                    });                    
+                });
+
+
+	$('#button2').bind("click",function(){
+		$('#result tr').show();
+	});
+
+        //        $("table.csv2table-table td").bind('click', function(){
+        //        //$("#table_disp td").bind('click', function(){
+        //            $tag_td = $(this)[0];
+        //            $tag_tr = $(this).parent()[0];
+        //            console.log("%s列, %s行", $tag_td.cellIndex, $tag_tr.rowIndex);
+        //        });
+
+            });
+
+            function init(){
+
+            // オーディオのイベント
+            audio.addEventListener("timeupdate",function (e){
+                // スライダーを更新
+                element_slider.max = audio.duration;
+                element_slider.value = audio.currentTime;
+            },false);
+
+            // 各エレメントを取得
+            var element_url = document.getElementById("edit_02_url");
+            var element_slider = document.getElementById("edit_02_slider");
+            var element_rate = document.getElementById("input_02_rate");
+            var element_autoplay = document.getElementById("input_02_autoplay");
+            var element_loop = document.getElementById("input_02_loop");
+            var element_result = document.getElementById("edit_02_result");
+
+            //不要な要素を非表示にする
+            //$("#edit_02_url").hide();
+            $("#button_02_load").hide();
+
+            var element;
+
+            // 読み込みボタンの element を取得
+            element = document.getElementById("button_02_load");
+            // ボタンが押されたときに実行されるイベント
+            element.onclick = function (){
+                // 送信したいURL
+                var url = element_url.value;
+                // URL アドレスをセット
+                audio.src = url;
+                // 読み込み開始
+                audio.load();
+            };
+
+            //var elements = document.getElementsByName("playBtn"); //csvを読み込んだ直後は認識できないので注意！
+            //for(i=0;i<elements.length;i++){
+            //    var e = elements[i];
+            //    e.onclick = function (){
+            //        audio.currentTime = 30; // e.value;
+            //    }
+            //}
+
+
+            // 再生ボタンの element を取得
+            element = document.getElementById("button_02_play");
+            // ボタンが押されたときに実行されるイベント
+            element.onclick = function (){
+                audio.play();
+            };
+
+            // 一時停止ボタンの element を取得
+            element = document.getElementById("button_02_pause");
+            // ボタンが押されたときに実行されるイベント
+            element.onclick = function (){
+                audio.pause();
+            };
+
+            // 停止ボタンの element を取得
+            element = document.getElementById("button_02_stop");
+            // ボタンが押されたときに実行されるイベント
+            element.onclick = function (){
+                audio.currentTime = 0;
+                audio.pause();
+            };
+
+            // 60 fps 間隔で実行する
+            setInterval(function (){
+                var v;
+                v = element_rate.value;
+                audio.playbackRate = v;
+
+                v = element_autoplay.checked;
+                audio.autoplay = v;
+
+                v = element_loop.checked;
+                audio.loop = v;
+
+                // リザルトを更新
+                var s = "";
+                s += "currentTime:" + audio.currentTime + "\n";
+                s += "duration(音声の長さ(sec)):" + audio.duration + "\n";
+                s += "paused:" + audio.paused + "\n";
+                s += "seeking:" + audio.seeking + "\n";
+                s += "readyState:" + audio.readyState + "\n";
+                element_result.value = s;
+
+            },1000/60);
+
+
+            // スライダー変更時に実行されるイベント
+            element_slider.onchange = function (){
+                audio.currentTime = this.value;
+            };
+
+            // サーバ側で用意しているサウンドファイルのリスト 音声ファイル名を日本語にするとなぜかDocumentsアプリで再生されなかった
+            var audio_file_list = [
+                {url:"audio.m4a" , type:"audio/mp4"},
+        //		{url:"http://hakuhin.jp/download/js/audio/sample_00.m4a" , type:"audio/mp4"},
+                {url:"http://hakuhin.jp/download/js/audio/sample_00.mp3" , type:"audio/mpeg"},
+                {url:"http://hakuhin.jp/download/js/audio/sample_00.ogg" , type:"audio/ogg"},
+                {url:"http://hakuhin.jp/download/js/audio/sample_00.wav" , type:"audio/wav"}
+            ];
+
+            // サポートしているコンテンツタイプを調べてデフォルト URL を設定する
+            var i;
+            var num = audio_file_list.length;
+            for(i=0;i<num;i++){
+                if(audio.canPlayType(audio_file_list[i].type) !== ""){
+                    element_url.value = audio_file_list[i].url;
+                    break;
+                }
+            }
+        }
+
+        </script>
+        
+        <div>絞込みワード：<input type="text" id="txtSearch"><input type="button" id="btnFilter" value="絞り込む"><input type="button" id="btnShowAllRows" value="全表示"></div>
+
+        <div id="table_disp"></div>
+        
+        <div><a href="./ChangeLog_SpeechApp.rtf">更新履歴</a></div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

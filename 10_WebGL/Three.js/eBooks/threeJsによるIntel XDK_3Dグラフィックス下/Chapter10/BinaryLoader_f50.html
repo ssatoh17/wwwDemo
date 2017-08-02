@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BinaryLoader：ｆ50</title>
+<script src="../javascript/three.js_r58/three.js"></script>  <!-- Three.js用ライブラリ -->
+<script src="../javascript/three.js_r58/controls/TrackballControls.js"></script> <!-- トラックボール用ライブラリ -->
+<script src="../javascript/three.js_r58/loaders/BinaryLoader.js"></script>
+
+<style>
+*{padding:0px; margin:0px}
+div#canvas-frame{
+	width: 500px;  /* 横幅 */
+	height: 500px; /* 縦幅 */
+	overflow:hidden;
+}
+</style>
+<script>
+	////////////////////////////////////////////////////////////////////
+	// windowイベントの定義
+	////////////////////////////////////////////////////////////////////
+	window.addEventListener("load", function () {
+		resizeTo(516, 539);
+		threeStart(); //Three.jsのスタート関数の実行
+	});
+	////////////////////////////////////////////////////////////////////
+	// Three.jsスタート関数の定義
+	////////////////////////////////////////////////////////////////////
+	function threeStart() {
+		initThree();  //Three.js初期化関数の実行
+		initLight();  //光源初期化関数の実行
+		initObject(); //オブジェクト初期化関数の実行
+		initCamera(); //カメラ初期化関数の実行
+		loop();       //無限ループ関数の実行
+	}
+	////////////////////////////////////////////////////////////////////
+	// Three.js初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var renderer,    //レンダラーオブジェクト
+	    scene,       //シーンオブジェクト
+	    canvasFrame; //キャンバスフレームのDOM要素
+	function initThree() {
+		//キャンバスフレームDOM要素の取得
+		canvasFrame = document.getElementById('canvas-frame');
+		//レンダラーオブジェクトの生成
+		renderer = new THREE.WebGLRenderer({ antialias: true });
+		//renderer = new THREE.CanvasRenderer();//<-----------------------------（canvasレンダラー）
+
+		if (!renderer) alert('Three.js の初期化に失敗しました');
+		//レンダラーのサイズの設定
+		renderer.setSize(canvasFrame.clientWidth, canvasFrame.clientHeight);
+		//キャンバスフレームDOM要素にcanvas要素を追加
+		canvasFrame.appendChild(renderer.domElement);
+
+		//レンダラークリアーカラーの設定
+		renderer.setClearColor(0x000000, 1.0);
+
+		//シーンオブジェクトの生成
+		scene = new THREE.Scene();
+	}
+	////////////////////////////////////////////////////////////////////
+	// カメラ初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var camera;    //カメラオブジェクト
+	function initCamera() {
+		//カメラオブジェクトの生成
+		camera = new THREE.PerspectiveCamera(45, canvasFrame.clientWidth / canvasFrame.clientHeight, 1, 10000);
+		//カメラの位置の設定
+		camera.position.set(0, 80, 100);
+		//カメラの上ベクトルの設定
+		camera.up.set(0, 1, 0);
+		//カメラの中心位置ベクトルの設定
+		camera.lookAt({ x: 0, y: 0, z: 0 }); //トラックボール利用時は自動的に無効
+
+		//トラックボールオブジェクトの宣言
+		trackball = new THREE.TrackballControls(camera, canvasFrame);
+
+		//トラックボール動作範囲のサイズとオフセットの設定
+		trackball.screen.width = canvasFrame.clientWidth;                        //横幅
+		trackball.screen.height = canvasFrame.clientHeight;                      //縦幅
+		trackball.screen.offsetLeft = canvasFrame.getBoundingClientRect().left;  //左オフセット
+		trackball.screen.offsetTop = canvasFrame.getBoundingClientRect().top;    //右オフセット
+
+		//トラックボールの回転無効化と回転速度の設定
+		trackball.noRotate = false;
+		trackball.rotateSpeed = 4.0;
+
+		//トラックボールの拡大無効化と拡大速度の設定
+		trackball.noZoom = false;
+		trackball.zoomSpeed = 4.0;
+
+		//トラックボールのカメラ中心移動の無効化と中心速度の設定
+		trackball.noPan = false;
+		trackball.panSpeed = 1.0;
+		trackball.target = new THREE.Vector3(0, 0, 0);
+
+		//トラックボールのスタティックムーブの有効化
+		trackball.staticMoving = true;
+		//トラックボールのダイナミックムーブ時の減衰定数
+		trackball.dynamicDampingFactor = 0.3;
+	}
+	////////////////////////////////////////////////////////////////////
+	// 光源初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var directionalLight;  //平行光源オブジェクト
+	var lighthelper;//平行光源可視化オブジェクト
+	function initLight() {
+		//平行光源オブジェクトの生成
+		directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.0);
+		//平行光源オブジェクトの位置の設定
+		directionalLight.position.set( 0, 20, 0);
+
+		//平行光源オブジェクトのシーンへの追加
+		scene.add(directionalLight);
+
+		//環境光オブジェクトの生成
+		ambientLight = new THREE.AmbientLight(0x888888, 1.0);
+		scene.add(ambientLight);
+
+/*
+		//平行光源可視化オブジェクトの生成
+		lighthelper = new THREE.DirectionalLightHelper(directionalLight, 10);
+		//平行光源可視化オブジェクトのシーンへの追加
+		scene.add(lighthelper);
+*/
+	}
+	////////////////////////////////////////////////////////////////////
+	// オブジェクト初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var axis; //軸オブジェクト
+	var monster; //３次元オブジェクト
+	var morphs = [];
+	var clock;
+	var F50;
+	function initObject() {
+		//軸オブジェクトの生成
+		axis = new THREE.AxisHelper(100);
+		//軸オブジェクトのシーンへの追加
+		scene.add(axis);
+		//軸オブジェクトの位置座標を設定
+		axis.position.set(0, 0, 0);
+
+
+		//環境マッピング用の画像ファイル
+		var path = "../javascript/textures/cube/Bridge2/";
+		var urls = [ path + "posx.jpg", path + "negx.jpg",
+					 path + "posy.jpg", path + "negy.jpg",
+					 path + "posz.jpg", path + "negz.jpg" ];
+		//環境マッピング用テクスチャオブジェクトの生成
+		var textureCube = THREE.ImageUtils.loadTextureCube( urls );
+		textureCube.format = THREE.RGBFormat;
+		//材質ライブラリ
+		var materialLib = {
+			"Red": 		new THREE.MeshLambertMaterial( { color: 0x660000, ambient: 0x330000, envMap: textureCube, combine: THREE.MixOperation, reflectivity: 0.25 } ),
+			"Pure chrome": 	new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: textureCube } ),
+			"Dark chrome":	new THREE.MeshLambertMaterial( { color: 0x444444, envMap: textureCube } ),
+			"Blue glass":	new THREE.MeshLambertMaterial( { color: 0x668899, envMap: textureCube, opacity: 0.75, transparent: true } ),
+			"Red glass":	new THREE.MeshLambertMaterial( { color: 0xff0000, opacity: 0.75, transparent: true } ),
+			"Orange glass":	new THREE.MeshLambertMaterial( { color: 0x995500, opacity: 0.75, transparent: true } ),
+
+
+			"Black rough":		new THREE.MeshLambertMaterial( { color: 0x050505 } ),
+			"Darkgray rough":	new THREE.MeshLambertMaterial( { color: 0x090909, ambient:0x090909 } ),
+			"Red rough":		new THREE.MeshLambertMaterial( { color: 0x330500 } ),
+
+			"Darkgray shiny":	new THREE.MeshPhongMaterial( { color: 0x000000, specular: 0x050505 } ),
+			"Gray shiny":		new THREE.MeshPhongMaterial( { color: 0x050505, shininess: 20 } )
+
+		}
+		//材質マップ
+		var materialMap = {
+			0:  materialLib[ "Dark chrome" ], 		// interior + rim
+			1:  materialLib[ "Pure chrome" ], 		// wheels + gears chrome
+			2:  materialLib[ "Blue glass" ], 		// glass
+			3:  materialLib[ "Red" ], 			    // torso mid + front spoiler
+			4:  materialLib[ "Darkgray shiny" ], 	// interior + behind seats
+			5:  materialLib[ "Darkgray shiny" ], 	// tiny dots in interior
+			6:  materialLib[ "Red" ], 			    // back torso
+			7:  materialLib[ "Red" ], 			    // right mirror decal
+			8:  materialLib[ "Red" ], 			    // front decal
+			9:  materialLib[ "Red" ], 			    // front torso
+			10: materialLib[ "Red" ], 			    // left mirror decal
+			11: materialLib[ "Pure chrome" ], 		// engine
+			12: materialLib[ "Darkgray rough" ],	// tires side
+			13: materialLib[ "Darkgray rough" ],	// tires bottom
+			14: materialLib[ "Darkgray shiny" ], 	// bottom
+			15: materialLib[ "Black rough" ],		// ???
+			16: materialLib[ "Orange glass" ],		// front signals
+			17: materialLib[ "Dark chrome" ], 		// wheels center
+			18: materialLib[ "Red glass" ], 		// back lights
+			19: materialLib[ "Black rough" ], 		// ???
+			20: materialLib[ "Red rough" ], 		// seats
+			21: materialLib[ "Black rough" ], 		// back plate
+			22: materialLib[ "Black rough" ], 		// front light dots
+			23: materialLib[ "Red" ], 			    // back torso
+			24: materialLib[ "Red" ] 			    // back torso center
+		}
+
+		//ローダーオブジェクト
+		var loader = new THREE.BinaryLoader( false );
+		loader.load( '../javascript/obj/f50/F50NoUv_bin.js', function ( geometry ) {
+
+			var faceMaterial = new THREE.MeshFaceMaterial();
+			for ( var i in materialMap ) {
+				faceMaterial.materials[ i ] = materialMap[ i ];
+			}
+			var F50 = new THREE.Mesh( geometry, faceMaterial );
+			F50.rotation.set(0, Math.PI/2, 0);
+			F50.scale.set(0.01, 0.01, 0.01);
+			scene.add( F50 );
+
+		} );
+
+
+	}
+
+	////////////////////////////////////////////////////////////////////
+	// 無限ループ関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var step = 0; //ステップ数
+	var t=0;
+	function loop() {
+		//トラックボールによるカメラオブジェクトのプロパティの更新
+		trackball.update();
+
+		//ステップ数のインクリメント
+		step++;
+
+		//クリアーカラーで初期化
+		renderer.clear();
+		//レンダリング
+		renderer.render(scene, camera);
+
+		//「loop()」関数の呼び出し
+		requestAnimationFrame(loop);
+	}
+</script>
+</head>
+<body>
+	<div id="canvas-frame"></div><!-- canvas要素を配置するdiv要素 -->
+</body>
+</html>

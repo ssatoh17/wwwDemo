@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>シェーダー材質を利用したフォン反射材質</title>
+<script src="../javascript/three.js_r58/three.js"></script>  <!-- Three.js用ライブラリ -->
+<script src="../javascript/three.js_r58/controls/TrackballControls.js"></script> <!-- トラックボール用ライブラリ -->
+<style>
+*{padding:0px; margin:0px}
+div#canvas-frame{
+	width: 500px;  /* 横幅 */
+	height: 500px; /* 縦幅 */
+	overflow:hidden;
+}
+</style>
+<script>
+	////////////////////////////////////////////////////////////////////
+	// windowイベントの定義
+	////////////////////////////////////////////////////////////////////
+	window.addEventListener("load", function () {
+		resizeTo(516, 539);
+		threeStart(); //Three.jsのスタート関数の実行
+	});
+	////////////////////////////////////////////////////////////////////
+	// Three.jsスタート関数の定義
+	////////////////////////////////////////////////////////////////////
+	function threeStart() {
+		initThree();  //Three.js初期化関数の実行
+		initLight();  //光源初期化関数の実行
+		initObject(); //オブジェクト初期化関数の実行
+		initCamera(); //カメラ初期化関数の実行
+		loop();       //無限ループ関数の実行
+	}
+	////////////////////////////////////////////////////////////////////
+	// Three.js初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var renderer,    //レンダラーオブジェクト
+	    scene,       //シーンオブジェクト
+	    canvasFrame; //キャンバスフレームのDOM要素
+	function initThree() {
+		//キャンバスフレームDOM要素の取得
+		canvasFrame = document.getElementById('canvas-frame');
+		//レンダラーオブジェクトの生成
+		renderer = new THREE.WebGLRenderer({ antialias: true });
+		//renderer = new THREE.CanvasRenderer();//<-----------------------------------------------------（canvasレンダラー）
+
+		if (!renderer) alert('Three.js の初期化に失敗しました');
+		//レンダラーのサイズの設定
+		renderer.setSize(canvasFrame.clientWidth, canvasFrame.clientHeight);
+		//キャンバスフレームDOM要素にcanvas要素を追加
+		canvasFrame.appendChild(renderer.domElement);
+
+		//レンダラークリアーカラーの設定
+		renderer.setClearColor(0x222222, 1.0);
+
+		//シーンオブジェクトの生成
+		scene = new THREE.Scene();
+	}
+	////////////////////////////////////////////////////////////////////
+	// カメラ初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var camera;    //カメラオブジェクト
+	function initCamera() {
+		//カメラオブジェクトの生成
+		camera = new THREE.PerspectiveCamera(45, canvasFrame.clientWidth / canvasFrame.clientHeight, 1, 10000);
+		//カメラの位置の設定
+		camera.position.set( 100, 100, 100);
+		//カメラの上ベクトルの設定
+		camera.up.set(0, 0, 1);
+		//カメラの中心位置ベクトルの設定
+		camera.lookAt({ x: 0, y: 0, z: 0 }); //トラックボール利用時は自動的に無効
+
+
+		//トラックボールオブジェクトの宣言
+		trackball = new THREE.TrackballControls(camera, canvasFrame);
+
+		//トラックボール動作範囲のサイズとオフセットの設定
+		trackball.screen.width = canvasFrame.clientWidth;                        //横幅
+		trackball.screen.height = canvasFrame.clientHeight;                      //縦幅
+		trackball.screen.offsetLeft = canvasFrame.getBoundingClientRect().left;  //左オフセット
+		trackball.screen.offsetTop = canvasFrame.getBoundingClientRect().top;    //右オフセット
+
+		//トラックボールの回転無効化と回転速度の設定
+		trackball.noRotate = false;
+		trackball.rotateSpeed = 4.0;
+
+		//トラックボールの拡大無効化と拡大速度の設定
+		trackball.noZoom = false;
+		trackball.zoomSpeed = 4.0;
+
+		//トラックボールのカメラ中心移動の無効化と中心速度の設定
+		trackball.noPan = false;
+		trackball.panSpeed = 1.0;
+		trackball.target = new THREE.Vector3(0, 0, 0);
+
+		//トラックボールのスタティックムーブの有効化
+		trackball.staticMoving = true;
+		//トラックボールのダイナミックムーブ時の減衰定数
+		trackball.dynamicDampingFactor = 0.3;
+	}
+	////////////////////////////////////////////////////////////////////
+	// 光源初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var directionalLight,  //平行光源オブジェクト
+	    ambientLight;      //環境光オブジェクト
+	var lighthelper;//平行光源可視化オブジェクト
+	function initLight() {
+		//平行光源オブジェクトの生成
+		directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1.0, 0);
+		//平行光源オブジェクトの位置の設定
+		directionalLight.position.set(50, 20, 50);
+		//平行光源オブジェクトのシーンへの追加
+		scene.add(directionalLight);
+
+		//平行光源可視化オブジェクトの生成
+		lighthelper = new THREE.DirectionalLightHelper(directionalLight, 2);
+		//平行光源可視化オブジェクトのシーンへの追加
+		scene.add(lighthelper);
+
+		//環境光オブジェクトの生成
+		ambientLight = new THREE.AmbientLight(0x202020);
+		//環境光オブジェクトのシーンへの追加
+		scene.add(ambientLight);
+	}
+	////////////////////////////////////////////////////////////////////
+	// オブジェクト初期化関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var axis; //軸オブジェクト
+	var sphere; //球体オブジェクト
+	function initObject() {
+		//軸オブジェクトの生成
+		axis = new THREE.AxisHelper(100);
+		//軸オブジェクトのシーンへの追加
+		scene.add(axis);
+		//軸オブジェクトの位置座標を設定
+		axis.position.set(0, 0, 0);
+
+		//形状オブジェクトの宣言
+		var geometry = new THREE.SphereGeometry(50, 50, 50);
+		var uniforms = {
+			lightPosition:  { type: "v3", value: directionalLight.position},
+			lightColor:  { type: "c", value: directionalLight.color},
+			ambientColor :{type: "c", value: ambientLight.color},
+			materialColor:  { type: "c", value: new THREE.Color(0xFF0000)}
+		};
+		//材質オブジェクトの宣言と生成
+		var material = new THREE.ShaderMaterial({
+			vertexShader: document.getElementById('vertexShader').textContent,
+			fragmentShader: document.getElementById('fragmentShader').textContent,
+			uniforms: uniforms,
+		});
+		//球体オブジェクトの生成
+		sphere = new THREE.Mesh(geometry, material);
+		//球体オブジェクトのシーンへの追加
+		scene.add(sphere);
+	}
+
+	////////////////////////////////////////////////////////////////////
+	// 無限ループ関数の定義
+	////////////////////////////////////////////////////////////////////
+	//グローバル変数の宣言
+	var step = 0; //ステップ数
+	function loop() {
+		//トラックボールによるカメラオブジェクトのプロパティの更新
+		trackball.update();
+		//ステップ数のインクリメント
+		step++;
+		//クリアーカラーで初期化
+		renderer.clear();
+		//レンダリング
+		renderer.render(scene, camera);
+		//「loop()」関数の呼び出し
+		requestAnimationFrame(loop);
+	}
+</script>
+<!--------------------------------------------------------------------------------------
+	シェーダーの定義
+ ---------------------------------------------------------------------------------------->
+<script id="vertexShader" type="x-shader/x-vertex">
+//頂点シェーダーからフラグメントシェーダーへの転送する変数
+varying vec3 mPosition;
+varying vec3 mvPosition;
+varying vec3 vNormal;
+void main()	{
+	//ワールド座標系の頂点座標
+	vec4 modelPosition = modelMatrix * vec4(position, 1.0) ;
+	mPosition = modelPosition.xyz;
+	//頂点座標の移動量
+	float amplitude = 45.0 * (1.0 - abs(normalize(mPosition).z));
+	//法線ベクトルのxy成分
+	vec3 normalXY  = vec3(normal.xy, 0);
+	//頂点座標のスライド
+	vec3 positionN = position - normalXY * amplitude ;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( positionN , 1.0 );
+
+	//視野座標系の法線ベクトル
+	vNormal = normalMatrix * normal ;
+	//視野座標系の頂点座標
+	vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0) ;
+	mvPosition = modelViewPosition.xyz;
+}
+</script>
+<script id="fragmentShader" type="x-shader/x-fragment">
+//カスタムuniform変数の取得
+uniform vec3 lightPosition; //光源位置座標
+uniform vec3 lightColor;    //光源色
+uniform vec3 materialColor; //材質色
+uniform vec3 ambientColor;  //環境色
+
+//バーテックスシェーダーから転送された変数
+varying vec3 mPosition;
+varying vec3 mvPosition;
+varying vec3 vNormal;
+void main()	{
+	//視点座標系における光線ベクトル
+	vec4 viewLightPosition = viewMatrix * vec4( lightPosition, 0.0);
+
+	//頂点色
+	vec3 pColor = abs(normalize(mPosition));
+
+	//ベクトルの規格化
+	vec3 N = normalize(vNormal);               //法線ベクトル
+	vec3 L = normalize(viewLightPosition.xyz); //光線ベクトル
+	//法線ベクトルと光線ベクトルの内積
+	float dotNL = dot(N, L);
+	//拡散色の決定
+	vec3 diffuse =  pColor * lightColor  * max(dotNL, 0.0);
+
+	//鏡面効果/////////////////////////////////////////////////////////////
+	vec3 C = - normalize( mvPosition );
+	vec3 R = reflect(-L, N);
+	//反射ベクトルとカメラ方向ベクトルとの内積
+	float dotRC = dot(R, C);
+	//鏡面色の決定
+	vec3 specular = lightColor * pow( max(dotRC, 0.0), 200.0);
+
+	//環境色の決定
+	vec3 ambient = pColor * ambientColor;
+
+	gl_FragColor = vec4( diffuse + specular + ambient, 1.0);
+}
+</script>
+</head>
+<body>
+	<div id="canvas-frame"></div><!-- canvas要素を配置するdiv要素 -->
+</body>
+</html>

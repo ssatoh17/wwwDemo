@@ -1,0 +1,1710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0031)http://hakuhin.jp/js/audio.html -->
+<html lang="ja-JP" style="height: 100%;"><div class="oneNoteWebClipperIsInstalledOnThisBrowser" style="display: none;"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta name="author" content="hakuhin">
+	<meta name="language" content="Japanese">
+	<meta name="ROBOTS" content="ALL">
+	<meta name="keywords" content="JavaScript,Audio">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-translate-customization" content="a48485daf0578662-0247ae5623b4ea71-g0a1657ec1a99ac56-a">
+
+	<link rel="shortcut icon" href="http://hakuhin.jp/icon/js.ico" type="image/vnd.microsoft.icon">
+	<link rel="stylesheet" type="text/css" href="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/main.css">
+	<link rel="stylesheet" type="text/css" href="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/js.css">
+	<link rel="author" href="https://plus.google.com/113623142701014539697">
+	<script src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/ca-pub-2028288171521864.js.ダウンロード"></script><script async="" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/analytics.js.ダウンロード"></script><script type="text/javascript" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/main.js.ダウンロード"></script>
+	<!--[if lte IE 7.0]><link rel="stylesheet" type="text/css" href="../css/ie.css"><![endif]-->
+
+
+	<title>JavaScriptプログラミング講座【オーディオについて（HTMLAudioElement）】</title>
+
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/translateelement.css"><script type="text/javascript" charset="UTF-8" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/main_ja.js.ダウンロード"></script><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style><script type="text/javascript" charset="UTF-8" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/element_main.js.ダウンロード"></script></head>
+<body class="body" data-pinterest-extension-installed="cr2.0.5" style="position: relative; min-height: 100%; top: 0px; transition: 0.6s ease-in-out;" cz-shortcut-listen="true">
+
+<header>
+	<style type="text/css">
+		<!--
+		#header_search_input{
+			font-size:16px;
+			border:none;
+			padding:0px 10px;
+			margin:0px;
+			box-sizing:content-box;
+			width:330px;
+			height:22px;
+			background:#FFF;
+		}
+		#header_search_submit{
+			border:none;
+			padding:0px;
+			margin:0px;
+			width:50px;
+			border-radius:0px 5px 5px 0px;
+			height:28px;
+			color:#FFF;
+			background:#40608f;
+			background-image:linear-gradient(to bottom, #40608f, #00204f);
+		}
+		#header_search_submit:hover{
+			background:#6080af;
+			background-image:linear-gradient(to bottom, #6080af, #20406f);
+		}
+		-->
+	</style>
+	<div style="background:#eee; height:40px; position:fixed; left:0px; top:0px; width:100%; z-index:1; border-bottom:2px solid #888;">
+		<table style="width:100%; height:40px; border-spacing: 0px;" border="0">
+		<tbody><tr><td style="width:30px;">
+		</td><td>
+			<table style="height:40px; border-spacing: 0px;" border="0">
+			<tbody><tr><td style="font-size:16px; font-weight:bold;">
+				<a href="http://hakuhin.jp/js.html" style="color:#000; line-height:0.0;">JavaScript プログラミング講座</a>
+			</td><td style="width:8px;">
+			</td><td id="index_button_container">
+			<a href="javascript:void(0)" id="index_button"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMi8xOS8xNNdcZSsAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAAxklEQVRIie2UsQ3CMBREXxAbMAo0MAASEzCBRUFJGlaITEkR3QAIRkBiCESPWCCwAaEgkawICqxELvBVlnXfd/9/nZOyLAmJXlD1aADo1wdj0jmwBQY/vlEAS8nufQy4E8g9xKlqch/xpoEgcA0seI/zVxRVrReSv/8HYgqCryCmIPgKWk+BMekKyPje3BNYSzaDDlIg2Q0wBe4fuA9gVos3DbQGyZ6AIXB2ri/ASLJHl9tZCiR7AybADjgAY8lem7yYgmjgBb/+RTrLeTyFAAAAAElFTkSuQmCC" style="border: none;"></a></td></tr>
+			</tbody></table>
+		</td><td style="width:100px;">
+			<div id="google_translate_element"><div class="skiptranslate goog-te-gadget" dir="ltr"><div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;"><img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/cleardot.gif" class="goog-te-gadget-icon" alt="" style="background-image: url(&quot;https://translate.googleapis.com/translate_static/img/te_ctrl3.gif&quot;); background-position: -65px 0px;"><span style="vertical-align: middle;"><a role="menu" class="goog-te-menu-value" href="javascript:void(0)"><span>言語を選択</span><img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/cleardot.gif" alt="" width="1" height="1"><span style="border-left: 1px solid rgb(187, 187, 187);">​</span><img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/cleardot.gif" alt="" width="1" height="1"><span style="color: rgb(118, 118, 118);">▼</span></a></span></div></div></div><script type="text/javascript">
+			function googleTranslateElementInit() {
+			  new google.translate.TranslateElement({pageLanguage: 'ja', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-15157446-2'}, 'google_translate_element');
+			}
+			</script><script type="text/javascript" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/element.js.ダウンロード" async=""></script>
+		</td><td style="width:10px;">
+		</td><td style="width:300px;">
+			<form action="http://www.google.com/cse" method="GET">
+				<table style="border:0px solid #888; width:400px; height:28px; border-radius:5px; border-spacing:0px;"><tbody><tr>
+				<td style="width:350px; padding:0px; border:3px inset #eee;  border-radius:5px 0px 0px 5px;">
+					<input type="search" name="q" value="" placeholder="検索したいワードを入力" id="header_search_input">
+					<input type="hidden" name="cx" value="001801027233803208759:cmyjheigcis">
+				</td>
+				<td style="width:50px; padding:0px;">
+					<input type="submit" value="検索" id="header_search_submit">
+				</td>
+				</tr></tbody></table>
+			</form>
+		</td><td style="width:30px;">
+		</td></tr>
+		</tbody></table>
+	</div>
+
+</header>
+
+
+
+<div id="out" style="left: 0px;">
+
+<div class="head">
+
+	<div style="height:40px;"></div>
+
+	<div style="height:0px;"></div>
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorBigBanner();</script><script async="" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/adsbygoogle.js.ダウンロード"></script><div style="text-align:left; line-height:1.0; margin-bottom:3px;"><div style="font-size:10px; color:#888; line-height:1.0;">スポンサードリンク</div></div>
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px; " data-ad-client="ca-pub-2028288171521864" data-ad-slot="9605026767" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/saved_resource.html"></iframe></ins></ins></ins>
+</div>
+<div style="height:5px;"></div>
+
+
+</div>
+
+<br>
+<div id="main">
+
+<script type="text/javascript" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/index.js.ダウンロード" async=""></script>
+
+
+<div id="MENU" class="anchor_target"></div>
+<div class="world">
+<script type="text/javascript">
+<!--
+HH_WriteTabForReference([
+	{folder:"js"  ,file:"audio.html"},
+	{folder:"as"  ,file:"sound.html"},
+	{folder:"as3" ,file:"sound.html"}
+]);
+//-->
+</script><div><table cellspacing="0"><tbody><tr><td style="padding:0px;" valign="bottom"><div style="padding:8px 20px; font-size:14px; font-weight:bold; font-weight:bold; border-radius: 10px 10px 0px 0px; background:#DCCAD5;">JavaScript</div></td><td style="padding:0px;" valign="bottom"><a href="http://hakuhin.jp/as/sound.html" style="text-decoration: none;"><div style="color:#000; padding:5px 20px; margin:0px 0px 0px 5px; font-size:12px; font-weight:bold; border-radius: 10px 10px 0px 0px; background:#CFDAE4;" onmouseover="this.style.background=&#39;#DFEAF4&#39;; this.style.padding=&#39;8px 20px&#39;;" onmouseout="this.style.background=&#39;#CFDAE4&#39;; this.style.padding=&#39;5px 20px&#39;;">ActionScript1.0～2.0</div></a></td><td style="padding:0px;" valign="bottom"><a href="http://hakuhin.jp/as3/sound.html" style="text-decoration: none;"><div style="color:#000; padding:5px 20px; margin:0px 0px 0px 5px; font-size:12px; font-weight:bold; border-radius: 10px 10px 0px 0px; background:#C6DDC6;" onmouseover="this.style.background=&#39;#D6EDD6&#39;; this.style.padding=&#39;8px 20px&#39;;" onmouseout="this.style.background=&#39;#C6DDC6&#39;; this.style.padding=&#39;5px 20px&#39;;">ActionScript3.0</div></a></td></tr></tbody></table></div>
+<div class="bg">
+<br>
+<div class="title"><h1>オーディオについて（HTMLAudioElement）</h1></div>
+<br>
+<br>
+<div class="window">
+
+<table class="contents">
+<tbody><tr><td class="contents_item">・</td><td class="contents_name"><a href="http://hakuhin.jp/js/audio.html#AUDIO_04">オーディオについて</a></td></tr>
+<tr><td class="contents_item">・</td><td class="contents_name"><a href="http://hakuhin.jp/js/audio.html#AUDIO_00">オーディオを作成する</a></td></tr>
+<tr><td class="contents_item">・</td><td class="contents_name"><a href="http://hakuhin.jp/js/audio.html#AUDIO_01">サウンドファイルを読み込む</a></td></tr>
+<tr><td class="contents_item">・</td><td class="contents_name"><a href="http://hakuhin.jp/js/audio.html#AUDIO_02">サウンドを再生する</a></td></tr>
+<tr><td class="contents_item">・</td><td class="contents_name"><a href="http://hakuhin.jp/js/audio.html#AUDIO_03">サウンドを制御する</a></td></tr>
+
+</tbody></table>
+
+
+</div>
+<br>
+<div class="window"><a href="http://hakuhin.jp/js.html">前のページに戻る</a></div>
+<br>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_04" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+<div class="title"><h2>オーディオについて</h2></div>
+<div class="break_l2">　</div>
+
+
+<div class="window"><br><br>
+
+<div class="label"><h3>■オーディオについて</h3></div>
+
+<br>
+
+<div class="left">
+<span class="strong">&lt;AUDIO&gt;</span> タグを使用すると、<span class="strong">サウンドファイルを読み込んで再生する</span>ことができます。
+<div class="break_l1">　</div>
+&lt;AUDIO&gt; タグは、HTML5 で追加された要素です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+Safari の場合、QuickTime のインストールが必要です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">AUDIO タグを使用してサウンドを再生する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">&lt;html&gt;
+  &lt;body&gt;</span>
+
+    <span class="point">&lt;audio</span> controls preload="auto"<span class="point">&gt;</span>
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.m4a" type="audio/mp4"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.mp3" type="audio/mpeg"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.ogg" type="audio/ogg"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.wav" type="audio/wav"&gt;
+      未対応時に表示される文字 
+    <span class="point">&lt;/audio&gt;</span>
+
+<span class="comment">  &lt;/body&gt;
+&lt;/html&gt;</span>
+</code></pre></div>
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サンプル表示</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<audio controls="">
+	<source src="http://hakuhin.jp/download/js/audio/sample_00.m4a" type="audio/mp4">
+	<source src="http://hakuhin.jp/download/js/audio/sample_00.mp3" type="audio/mpeg">
+	<source src="http://hakuhin.jp/download/js/audio/sample_00.ogg" type="audio/ogg">
+	<source src="http://hakuhin.jp/download/js/audio/sample_00.wav" type="audio/wav">
+	対応していません。
+</audio>
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+
+<div class="label"><h3>■ HTMLMediaElement インターフェースについて</h3></div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+<span class="strong">HTMLMediaElement</span> インターフェースは、<span class="strong">メディアを制御する</span>ための機能がまとまっています。
+</div>
+<div class="break_l4">　</div>
+
+<div class="label"><h3>■ HTMLAudioElement インターフェースについて</h3></div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+<span class="strong">HTMLAudioElement</span> インターフェースは、<span class="strong">サウンドファイルを再生する</span>ための機能がまとまっています。
+</div>
+<div class="break_l1">　</div>
+<div class="left">
+HTMLAudioElement インターフェースは、<span class="strong">&lt;AUDIO&gt;</span> タグに相当します。
+<div class="break_l1">　</div>
+エレメントの一種です。
+</div>
+<div class="break_l1">　</div>
+<div class="left">
+このページでは、HTMLMediaElement と HTMLAudioElement インターフェースで供給される機能について解説しています。
+</div>
+
+<div class="break_l2">　</div>
+
+
+<div class="label_sub">■ HTMLAudioElement インターフェースの派生について</div>
+
+<br>
+
+<div class="left">
+HTMLAudioElement インターフェースは、以下の様に派生しています。
+<div class="break_l1">　</div>
+ここで解説してない分は、リンク先に解説がありますので合わせてご覧下さい。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="list" style="width:300px; margin:0 auto;"><table class="list_table">
+<tbody><tr><td class="column0"><a href="http://hakuhin.jp/js/object.html">Object</a></td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0"><a href="http://hakuhin.jp/js/event.html">EventTarget</a></td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0"><a href="http://hakuhin.jp/js/dom_node.html">Node</a></td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0">Element</td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0"><a href="http://hakuhin.jp/js/element.html">HTMLElement</a></td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0">HTMLMediaElement</td></tr>
+<tr><td class="column1">↓派生</td></tr>
+<tr><td class="column0"><a href="http://hakuhin.jp/js/audio.html">HTMLAudioElement</a></td></tr>
+</tbody></table></div><!--list-->
+
+<div class="break_l4">　</div>
+
+<div class="label"><h3>■ブラウザが HTMLAudioElement をサポートしているか調べる</h3></div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+ブラウザが、オーディオをサポートしているか調べるには、<wbr><span class="strong">window.<wbr>HTMLAudioElement</span><wbr> が真であるか比較します。
+</div>
+
+<div class="break_l1">　</div>
+
+<script type="text/javascript"><!--
+HH_WriteSampleForJavaScript("結果:\<input type=\"text\" id=\"edit_box00_00\" value=\"\"\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\t// エレメントを取得\n\tvar element = document.getElementById(\"edit_box00_00\");\n\n\t// HTMLAudioElement をサポートしているか調べる\n\tif(window.HTMLAudioElement){\n\t\telement.value = \"対応している\";\n\t}else{\n\t\telement.value = \"未対応\";\n\t}\n})();\n//--\>\n\</script\>");
+//-->
+</script><div class="js_sample"><div class="js_sample_head">サンプル</div><div class="js_sample_foot">結果:<input type="text" id="edit_box00_00" value="">
+
+<script type="text/javascript">
+
+// 匿名関数内で実行
+(function (){
+	// エレメントを取得
+	var element = document.getElementById("edit_box00_00");
+
+	// HTMLAudioElement をサポートしているか調べる
+	if(window.HTMLAudioElement){
+		element.value = "対応している";
+	}else{
+		element.value = "未対応";
+	}
+})();
+//
+</script></div></div><div id="js_source0" class="js_source"><div id="js_source_head0" class="js_source_head">ソースを開く（クリック）</div></div>
+
+<div class="break_l4">　</div>
+
+</div>
+
+
+<br>
+<div class="window"><a href="http://hakuhin.jp/js/audio.html#MENU">上に戻る</a></div>
+<br>
+</div>
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_04");</script>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_00" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+<div class="title"><h2>オーディオを作成する</h2></div>
+<div class="break_l2">　</div>
+
+
+<div class="window"><br><br>
+
+<div class="label"><h3>■HTMLAudioElement オブジェクトを作成する</h3></div>
+
+<div class="break_l1">　</div>
+
+<div class="label_sub">■createElement() メソッドを使用する</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+HTMLAudioElement オブジェクトを作成するには、<wbr><span class="strong">document.<wbr>createElement()</span><wbr> メソッドを使用します。
+<div class="break_l1">　</div>
+引数に、"audio" を指定します。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">動的に HTMLAudioElement オブジェクトを作成する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// HTMLAudioElement オブジェクトを作成する</span>
+var audio = <span class="point">document.createElement</span>(<span class="property">"audio"</span>);
+
+<span class="comment">// 出力テスト</span>
+console.log(audio);
+</code></pre></div>
+</div>
+
+
+<div class="break_l2">　</div>
+
+<div class="label_sub">■ Audio コンストラクタを使用する</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+new 演算子を使って、<span class="strong">Audio</span> コンストラクタをインスタンス化する事もできます。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="method">
+<div class="method_head">new Audio( "URL" ) :HTMLAudioElement</div>
+<table class="method_hud">
+<tbody><tr><td class="argument0">第01引数(略可)</td><td class="argument_var0">String</td><td class="argument_exp0">サウンドファイルの URL を指定</td></tr>
+<tr><td class="argument1">戻り値        </td><td class="argument_var1">HTMLAudioElement</td><td class="argument_exp1">新しく作成された HTMLAudioElement オブジェクト</td></tr>
+</tbody></table>
+</div><!--method-->
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">Audio コンストラクタを使って、動的に HTMLAudioElement オブジェクトを作成する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// HTMLAudioElement オブジェクトを作成する</span>
+var audio = new <span class="point">Audio()</span>;
+
+<span class="comment">// 出力テスト</span>
+console.log(audio);
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+<div class="label"><h3>■オーディオプレイヤーをブラウザに表示する</h3></div>
+
+<br>
+
+<div class="left">
+オーディオプレイヤーの可視表示を設定するには、<span class="strong">controls</span> プロパティを使用します。
+<div class="break_l1">　</div>
+デフォルトは、false です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+HTMLAudioElement オブジェクトを、ブラウザに表示するには、<a href="http://hakuhin.jp/js/dom.html#DOM_04">任意のノードリストに登録する</a>必要があります。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+<span class="strong">音を出力したいだけの場合は、ノードリストに登録する必要はありません。</span>
+</div>
+
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">オーディオを動的に作成して、ブラウザに表示する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// HTMLAudioElement オブジェクトを作成する</span>
+var audio = new Audio();
+
+<span class="comment">// コントロールの表示を有効</span>
+audio.<span class="point">controls</span> = true;
+
+<span class="comment">// BODY のノードリストに登録する</span>
+document.body.<span class="point">appendChild</span>(audio);
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+
+<div class="label"><h3>■静的な &lt;AUDIO&gt; タグから、HTMLAudioElement オブジェクトを取得する</h3></div>
+
+<br>
+
+<div class="left">
+静的に用意した &lt;AUDIO&gt; タグから、エレメントを取得する方法は、<a href="http://hakuhin.jp/js/dom.html#DOM_01">こちら</a>で解説しています。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">静的な &lt;AUDIO&gt; タグから、HTMLAudioElement オブジェクトを取得する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">&lt;html&gt;
+  &lt;body&gt;</span>
+
+    <span class="point">&lt;audio</span> id="aaa" controls preload="auto"<span class="point">&gt;</span>
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.m4a" type="audio/mp4"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.mp3" type="audio/mpeg"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.ogg" type="audio/ogg"&gt;
+      &lt;source src="http://hakuhin.jp/download/js/audio/sample_00.wav" type="audio/wav"&gt;
+    <span class="point">&lt;/audio&gt;</span>
+
+    &lt;script type="text/javascript"&gt;
+    <span class="comment">&lt;!--</span>
+	<span class="comment">// "aaa" という ID 属性のエレメントを取得する</span>
+	var audio = document.getElementById("aaa");
+
+	<span class="comment">// 出力テスト</span>
+	console.log(audio);
+
+    <span class="comment">//--&gt;</span>
+    &lt;/script&gt;
+
+  <span class="comment">&lt;/body&gt;
+&lt;/html&gt;</span>
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+</div>
+
+
+<br>
+<div class="window"><a href="http://hakuhin.jp/js/audio.html#MENU">上に戻る</a></div>
+<br>
+</div>
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_00");</script>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_01" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+<div class="title"><h2>サウンドファイルを読み込む</h2></div>
+<div class="break_l2">　</div>
+
+
+<script type="text/javascript"><!--
+HH_WriteSampleForJavaScript("URL:\<br\>\n\<input id=\"edit_01_url\" style=\"width:100%;\"\>\</input\>\<br\>\n\<input type=\"button\" id=\"button_01_load\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"読み込み\"\>\<br\>\nオーディオ:\<br\>\n\<audio id=\"audio_01\" controls style=\"width:100%; margin:0px 0px 5px 0px;\"\>このブラウザはオーディオ未対応です。\</audio\>\<br\>\n\<div style=\"width:100%; margin:0px 0px 10px 0px;\"\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>自動再生:\<input type=\"checkbox\" id=\"input_01_autoplay\" checked\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>ループ:\<input type=\"checkbox\" id=\"input_01_loop\"\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>再生速度:\<input type=\"number\" id=\"input_01_rate\" value=\"1.0\" min=\"-10.0\" max=\"10.0\" step=\"0.01\"\>\</span\>\n\</div\>\nリザルト:\<br\>\n\<textarea id=\"edit_01_result\" style=\"width:100%; height:100px; margin:0px 0px 5px 0px;\" disabled\>\</textarea\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\n\t// 各エレメントを取得\n\tvar element_url = document.getElementById(\"edit_01_url\");\n\tvar element_audio = document.getElementById(\"audio_01\");\n\tvar element_rate = document.getElementById(\"input_01_rate\");\n\tvar element_autoplay = document.getElementById(\"input_01_autoplay\");\n\tvar element_loop = document.getElementById(\"input_01_loop\");\n\tvar element_result = document.getElementById(\"edit_01_result\");\n\t\n\t// オーディオの各種イベント\n\telement_audio.addEventListener(\"abort\",function (e){\n\t\telement_result.value = \"abort:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"canplay\",function (e){\n\t\telement_result.value = \"canplay:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"canplaythrough\",function (e){\n\t\telement_result.value = \"canplaythrough:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"durationchange\",function (e){\n\t\telement_result.value = \"durationchange:\" + \" duration:\" + this.duration + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"emptied\",function (e){\n\t\telement_result.value = \"emptied:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"ended\",function (e){\n\t\telement_result.value = \"ended:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"error\",function (e){\n\t\telement_result.value = \"error:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"loadeddata\",function (e){\n\t\telement_result.value = \"loadeddata:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"loadedmetadata\",function (e){\n\t\telement_result.value = \"loadedmetadata:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"loadstart\",function (e){\n\t\telement_result.value = \"loadstart:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"pause\",function (e){\n\t\telement_result.value = \"pause:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"play\",function (e){\n\t\telement_result.value = \"play:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"playing\",function (e){\n\t\telement_result.value = \"playing:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"progress\",function (e){\n\t\telement_result.value = \"progress:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"ratechange\",function (e){\n\t\telement_result.value = \"ratechange:\" + \" defaultPlaybackRate:\" + this.defaultPlaybackRate + \" playbackRate:\" + this.playbackRate + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"seeked\",function (e){\n\t\telement_result.value = \"seeked:\" + \" seeking:\" + this.seeking + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"seeking\",function (e){\n\t\telement_result.value = \"seeking:\" + \" seeking:\" + this.seeking + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"stalled\",function (e){\n\t\telement_result.value = \"stalled:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"suspend\",function (e){\n\t\telement_result.value = \"suspend:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"timeupdate\",function (e){\n\t\telement_result.value = \"timeupdate:\" + \" currentTime:\" + this.currentTime + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"volumechange\",function (e){\n\t\telement_result.value = \"volumechange:\" + \" volume:\" + this.volume + \" muted:\" + this.muted + \"\\n\" + element_result.value;\n\t},false);\n\n\telement_audio.addEventListener(\"waiting\",function (e){\n\t\telement_result.value = \"waiting:\" + \"\\n\" + element_result.value;\n\t},false);\n\n\tvar element;\n\t\n\t// 読み込みボタンの element を取得\n\telement = document.getElementById(\"button_01_load\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\n\t\t// 送信したい URL 先\n\t\tvar url = element_url.value;\n\n\t\t// URL アドレスをセット\n\t\telement_audio.src = url;\n\n\t\t// 読み込み開始\n\t\telement_audio.load();\n\t};\n\n\t// 60 fps 間隔で実行する\n\tsetInterval(function (){\n\t\tvar v;\n\t\tv = element_rate.value;\n\t\telement_audio.playbackRate = v;\n\n\t\tv = element_autoplay.checked;\n\t\telement_audio.autoplay = v;\n\n\t\tv = element_loop.checked;\n\t\telement_audio.loop = v;\n\n\t},1000/60);\n\n\t// サーバ側で用意しているサウンドファイルのリスト\n\tvar audio_file_list = [\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.m4a\" , type:\"audio/mp4\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.mp3\" , type:\"audio/mpeg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.ogg\" , type:\"audio/ogg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.wav\" , type:\"audio/wav\"}\n\t];\n\t\n\t// サポートしているコンテンツタイプを調べてデフォルト URL を設定する\n\tvar i;\n\tvar num = audio_file_list.length;\n\tfor(i=0;i\<num;i++){\n\t\tif(element_audio.canPlayType(audio_file_list[i].type) !== \"\"){\n\t\t\telement_url.value = audio_file_list[i].url;\n\t\t\tbreak;\n\t\t}\n\t}\n})();\n//--\>\n\</script\>");
+//-->
+</script><div class="js_sample"><div class="js_sample_head">サンプル</div><div class="js_sample_foot">URL:<br>
+<input id="edit_01_url" style="width:100%;"><br>
+<input type="button" id="button_01_load" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="読み込み"><br>
+オーディオ:<br>
+<audio id="audio_01" controls="" style="width:100%; margin:0px 0px 5px 0px;" autoplay="">このブラウザはオーディオ未対応です。</audio><br>
+<div style="width:100%; margin:0px 0px 10px 0px;">
+	<span style="margin:0px 50px 0px 0px;">自動再生:<input type="checkbox" id="input_01_autoplay" checked=""></span>
+	<span style="margin:0px 50px 0px 0px;">ループ:<input type="checkbox" id="input_01_loop"></span>
+	<span style="margin:0px 50px 0px 0px;">再生速度:<input type="number" id="input_01_rate" value="1.0" min="-10.0" max="10.0" step="0.01"></span>
+</div>
+リザルト:<br>
+<textarea id="edit_01_result" style="width:100%; height:100px; margin:0px 0px 5px 0px;" disabled=""></textarea>
+
+<script type="text/javascript">
+
+// 匿名関数内で実行
+(function (){
+
+	// 各エレメントを取得
+	var element_url = document.getElementById("edit_01_url");
+	var element_audio = document.getElementById("audio_01");
+	var element_rate = document.getElementById("input_01_rate");
+	var element_autoplay = document.getElementById("input_01_autoplay");
+	var element_loop = document.getElementById("input_01_loop");
+	var element_result = document.getElementById("edit_01_result");
+	
+	// オーディオの各種イベント
+	element_audio.addEventListener("abort",function (e){
+		element_result.value = "abort:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("canplay",function (e){
+		element_result.value = "canplay:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("canplaythrough",function (e){
+		element_result.value = "canplaythrough:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("durationchange",function (e){
+		element_result.value = "durationchange:" + " duration:" + this.duration + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("emptied",function (e){
+		element_result.value = "emptied:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("ended",function (e){
+		element_result.value = "ended:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("error",function (e){
+		element_result.value = "error:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("loadeddata",function (e){
+		element_result.value = "loadeddata:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("loadedmetadata",function (e){
+		element_result.value = "loadedmetadata:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("loadstart",function (e){
+		element_result.value = "loadstart:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("pause",function (e){
+		element_result.value = "pause:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("play",function (e){
+		element_result.value = "play:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("playing",function (e){
+		element_result.value = "playing:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("progress",function (e){
+		element_result.value = "progress:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("ratechange",function (e){
+		element_result.value = "ratechange:" + " defaultPlaybackRate:" + this.defaultPlaybackRate + " playbackRate:" + this.playbackRate + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("seeked",function (e){
+		element_result.value = "seeked:" + " seeking:" + this.seeking + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("seeking",function (e){
+		element_result.value = "seeking:" + " seeking:" + this.seeking + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("stalled",function (e){
+		element_result.value = "stalled:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("suspend",function (e){
+		element_result.value = "suspend:" + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("timeupdate",function (e){
+		element_result.value = "timeupdate:" + " currentTime:" + this.currentTime + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("volumechange",function (e){
+		element_result.value = "volumechange:" + " volume:" + this.volume + " muted:" + this.muted + "\n" + element_result.value;
+	},false);
+
+	element_audio.addEventListener("waiting",function (e){
+		element_result.value = "waiting:" + "\n" + element_result.value;
+	},false);
+
+	var element;
+	
+	// 読み込みボタンの element を取得
+	element = document.getElementById("button_01_load");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+
+		// 送信したい URL 先
+		var url = element_url.value;
+
+		// URL アドレスをセット
+		element_audio.src = url;
+
+		// 読み込み開始
+		element_audio.load();
+	};
+
+	// 60 fps 間隔で実行する
+	setInterval(function (){
+		var v;
+		v = element_rate.value;
+		element_audio.playbackRate = v;
+
+		v = element_autoplay.checked;
+		element_audio.autoplay = v;
+
+		v = element_loop.checked;
+		element_audio.loop = v;
+
+	},1000/60);
+
+	// サーバ側で用意しているサウンドファイルのリスト
+	var audio_file_list = [
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.m4a" , type:"audio/mp4"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.mp3" , type:"audio/mpeg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.ogg" , type:"audio/ogg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.wav" , type:"audio/wav"}
+	];
+	
+	// サポートしているコンテンツタイプを調べてデフォルト URL を設定する
+	var i;
+	var num = audio_file_list.length;
+	for(i=0;i<num;i++){
+		if(element_audio.canPlayType(audio_file_list[i].type) !== ""){
+			element_url.value = audio_file_list[i].url;
+			break;
+		}
+	}
+})();
+//
+</script></div></div><div id="js_source1" class="js_source"><div id="js_source_head1" class="js_source_head">ソースを開く（クリック）</div></div>
+
+<div class="break_l2">　</div>
+
+<div class="window"><br><br>
+
+
+<div class="label"><h3>■プリロードを設定する</h3></div>
+
+<br>
+
+<div class="left">
+プリロードを設定するには、<span class="strong">preload</span> プロパティを使用します。
+<div class="break_l1">　</div>
+以下のプリロード設定があります。デフォルトでは "auto" となります。
+<div class="break_l0">　</div>
+autoplay 属性が有効の場合、設定は無視され "auto" となります。
+</div>
+
+<div class="break_l2">　</div>
+<div class="list"><table class="list_table">
+<tbody><tr><td class="label0" style="width:150px;">文字列</td>	<td class="label1">解説</td></tr>
+<tr><td class="column0">"auto"</td>		<td class="column1">すべてのデータを事前に読み込む</td></tr>
+<tr><td class="column0">"metadata"</td>	<td class="column1">メタデータのみを事前に読み込む</td></tr>
+<tr><td class="column0">"none"</td>		<td class="column1">事前に読み込みを行わない</td></tr>
+
+</tbody></table></div><!--list-->
+
+<div class="break_l2">　</div>
+
+
+<div class="src">
+<div class="src_head">プリロードを設定する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// プリロードを設定する</span>
+audio.<span class="point">preload</span> = "metadata";
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+<div class="label"><h3>■サウンドファイルを外部から読み込む</h3></div>
+
+<br>
+
+<div class="left">
+<span class="strong">src</span> プロパティに、<span class="strong">「サウンドファイルまでの URL アドレス」を文字列で指定</span>します。
+<div class="break_l1">　</div>
+
+src プロパティに値をセットした時点で、プリロードの設定通りの読み込みが開始されます。
+</div>
+
+<div class="break_l1">　</div>
+
+
+<div class="src">
+<div class="src_head">サウンドファイルまでの URL アドレスを指定する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.<span class="point">src</span> = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div class="left">
+<span class="strong">load()</span> メソッドを呼び出すと、明示的にサウンドファイルの読み込みを開始します。
+</div>
+
+<div class="break_l1">　</div>
+
+
+<div class="src">
+<div class="src_head">明示的にロードを開始する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// プリロードを設定する</span>
+audio.preload = "none";
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 読み込みを開始する</span>
+audio.<span class="point">load</span>();
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+
+<div class="label"><h3>■ブラウザが対応しているサウンドフォーマットを調べる</h3></div>
+
+
+<div class="break_l1">　</div>
+
+<div class="left">
+ブラウザが、指定したサウンドファイルのフォーマットに対応しているか調べるには、<span class="strong">canPlayType()</span> メソッドを使用します。
+<div class="break_l1">　</div>
+引数に<span class="strong">コンテンツタイプ</span>を文字列で指定します。
+<div class="break_l1">　</div>
+戻り値から <span class="strong">"" が得られればフォーマットに対応していません</span>。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+コンテンツタイプの一覧です。
+</div>
+
+<div class="break_l2">　</div>
+<div class="list"><table class="list_table">
+<tbody><tr><td class="label0" style="width:150px;">フォーマット</td>	<td class="label1">コンテンツタイプ</td></tr>
+<tr><td class="column0">WAVE</td>		<td class="column1">audio/wav</td></tr>
+<tr><td class="column0">MP3</td>		<td class="column1">audio/mpeg</td></tr>
+<tr><td class="column0">Ogg Vorbis</td>	<td class="column1">audio/ogg</td></tr>
+<tr><td class="column0">AAC</td>		<td class="column1">audio/mp4</td></tr>
+
+</tbody></table></div><!--list-->
+
+
+<div class="break_l1">　</div>
+
+
+<div class="src">
+<div class="src_head">サポートするサウンドファイルの URL を調べる</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サーバ側で用意しているサウンドファイルのリスト</span>
+var audio_file_list = [
+	{url:"http://hakuhin.jp/download/js/audio/sample_00.m4a" , type:"audio/mp4"},
+	{url:"http://hakuhin.jp/download/js/audio/sample_00.mp3" , type:"audio/mpeg"},
+	{url:"http://hakuhin.jp/download/js/audio/sample_00.ogg" , type:"audio/ogg"},
+	{url:"http://hakuhin.jp/download/js/audio/sample_00.wav" , type:"audio/wav"}
+];
+
+<span class="comment">// サポートしているコンテンツタイプを調べて URL を設定する</span>
+var i;
+var num = audio_file_list.length;
+for(i=0;i &lt; num;i++){
+	if(audio.canPlayType(audio_file_list[i].type) !== ""){
+		audio.src = audio_file_list[i].url;
+		break;
+	}
+}
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+
+<div class="label"><h3>■フォーマット対応チェッカー</h3></div>
+
+
+<div class="break_l1">　</div>
+
+<div class="left">
+どのフォーマットに対応しているかチェックできます。
+<div class="break_l1">　</div>
+様々なブラウザからアクセスしてみて下さい。
+</div>
+
+<div class="break_l1">　</div>
+
+<script type="text/javascript"><!--
+HH_WriteSampleForJavaScript("結果:\<textarea type=\"text\" id=\"edit_box01_01\" style=\"width:100%; height:150px;\"\>\</textarea\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\n\tvar param = [\n\t\t{name:\"WAVE\", type:\'audio/wav\'},\n\t\t{name:\"MP3\", type:\'audio/mpeg\'},\n\t\t{name:\"Ogg Vorbis\", type:\'audio/ogg\'},\n\t\t{name:\"AAC\", type:\'audio/mp4\'},\n\t\t{name:\"\", type:\'audio/32kadpcm\'},\n\t\t{name:\".aiff .aif .aifc\", type:\'audio/aiff\'},\n\t\t{name:\".au .snd\", type:\'audio/basic\'},\n\t\t{name:\".es .esl\", type:\'audio/echospeech\'},\n\t\t{name:\".mid .midi .rmi .kar\", type:\'audio/mid\'},\n\t\t{name:\".mid .midi .rmi .kar\", type:\'audio/midi\'},\n\t\t{name:\".mp3\", type:\'audio/mp3\'},\n\t\t{name:\".m3u .pls\", type:\'audio/mpegurl\'},\n\t\t{name:\".mp3\", type:\'audio/mpg\'},\n\t\t{name:\".la .lma\", type:\'audio/nspaudio\'},\n\t\t{name:\".rmf\", type:\'audio/rmf\'},\n\t\t{name:\".tsi\", type:\'audio/tsplayer\'},\n\t\t{name:\"\", type:\'audio/vnd.qcelp\'},\n\t\t{name:\".ra\", type:\'audio/vnd.rn-realaudio\'},\n\t\t{name:\".vox\", type:\'audio/voxware\'},\n\t\t{name:\".aiff .aif .aifc\", type:\'audio/x-aiff\'},\n\t\t{name:\".cht .dus\", type:\'audio/x-dspeech\'},\n\t\t{name:\".pae\", type:\'audio/x-epac\'},\n\t\t{name:\".oke\", type:\'audio/x-karaoke\'},\n\t\t{name:\"\", type:\'audio/x-liquid\'},\n\t\t{name:\"\", type:\'audio/x-liquid-file\'},\n\t\t{name:\"\", type:\'audio/x-liquid-secure\'},\n\t\t{name:\".lam\", type:\'audio/x-liveaudio\'},\n\t\t{name:\".mid .midi .rmi .kar\", type:\'audio/x-mid\'},\n\t\t{name:\".mid .midi .rmi .kar\", type:\'audio/x-midi\'},\n\t\t{name:\".mio\", type:\'audio/x-mio\'},\n\t\t{name:\".mp3\", type:\'audio/x-mp3\'},\n\t\t{name:\".mp2 .mpa .abs .mpega\", type:\'audio/x-mpeg\'},\n\t\t{name:\".m3u .pls\", type:\'audio/x-mpegurl\'},\n\t\t{name:\".mp3\", type:\'audio/x-mpg\'},\n\t\t{name:\".wma\", type:\'audio/x-ms-wma\'},\n\t\t{name:\".la .lma\", type:\'audio/x-nspaudio\'},\n\t\t{name:\".pac\", type:\'audio/x-pac\'},\n\t\t{name:\".aiff .aif\", type:\'audio/x-pn-aiff\'},\n\t\t{name:\".au\", type:\'audio/x-pn-au\'},\n\t\t{name:\".ra .ram .rm .rmm\", type:\'audio/x-pn-realaudio\'},\n\t\t{name:\".rpm\", type:\'audio/x-pn-realaudio-plugin\'},\n\t\t{name:\".wav\", type:\'audio/x-pn-wav\'},\n\t\t{name:\".wav\", type:\'audio/x-pn-windows-acm\'},\n\t\t{name:\".ra\", type:\'audio/x-realaudio\'},\n\t\t{name:\".rmf\", type:\'audio/x-rmf\'},\n\t\t{name:\".m3u .pls\", type:\'audio/x-scpls\'},\n\t\t{name:\".sd2\", type:\'audio/x-sd2\'},\n\t\t{name:\".vqf .vql\", type:\'audio/x-twinvq\'},\n\t\t{name:\".vqe\", type:\'audio/x-twinvq-plugin\'},\n\t\t{name:\".wav\", type:\'audio/x-wav\'}\n\t];\n\n\t// AudioElement を作成する\n\tvar audio = document.createElement(\"audio\");\n\n\t// エレメントを取得\n\tvar element = document.getElementById(\"edit_box01_01\");\n\n\n\tvar s = \"\";\n\tvar i;\n\tvar num = param.length;\n\tfor(i=0;i \< num;i++){\n\t\ts += param[i].name + \"(\" + param[i].type + \"):\";\n\n\t\t// フォーマットが対応しているか調べる\n\t\tif(audio.canPlayType(param[i].type) !== \"\"){\n\t\t\ts += \"対応している\";\n\t\t}else{\n\t\t\ts += \"未対応\";\n\t\t}\n\t\ts += \"\\n\";\n\t}\n\telement.value = s;\n\n})();\n//--\>\n\</script\>");
+//-->
+</script><div class="js_sample"><div class="js_sample_head">サンプル</div><div class="js_sample_foot">結果:<textarea type="text" id="edit_box01_01" style="width:100%; height:150px;"></textarea>
+
+<script type="text/javascript">
+
+// 匿名関数内で実行
+(function (){
+
+	var param = [
+		{name:"WAVE", type:'audio/wav'},
+		{name:"MP3", type:'audio/mpeg'},
+		{name:"Ogg Vorbis", type:'audio/ogg'},
+		{name:"AAC", type:'audio/mp4'},
+		{name:"", type:'audio/32kadpcm'},
+		{name:".aiff .aif .aifc", type:'audio/aiff'},
+		{name:".au .snd", type:'audio/basic'},
+		{name:".es .esl", type:'audio/echospeech'},
+		{name:".mid .midi .rmi .kar", type:'audio/mid'},
+		{name:".mid .midi .rmi .kar", type:'audio/midi'},
+		{name:".mp3", type:'audio/mp3'},
+		{name:".m3u .pls", type:'audio/mpegurl'},
+		{name:".mp3", type:'audio/mpg'},
+		{name:".la .lma", type:'audio/nspaudio'},
+		{name:".rmf", type:'audio/rmf'},
+		{name:".tsi", type:'audio/tsplayer'},
+		{name:"", type:'audio/vnd.qcelp'},
+		{name:".ra", type:'audio/vnd.rn-realaudio'},
+		{name:".vox", type:'audio/voxware'},
+		{name:".aiff .aif .aifc", type:'audio/x-aiff'},
+		{name:".cht .dus", type:'audio/x-dspeech'},
+		{name:".pae", type:'audio/x-epac'},
+		{name:".oke", type:'audio/x-karaoke'},
+		{name:"", type:'audio/x-liquid'},
+		{name:"", type:'audio/x-liquid-file'},
+		{name:"", type:'audio/x-liquid-secure'},
+		{name:".lam", type:'audio/x-liveaudio'},
+		{name:".mid .midi .rmi .kar", type:'audio/x-mid'},
+		{name:".mid .midi .rmi .kar", type:'audio/x-midi'},
+		{name:".mio", type:'audio/x-mio'},
+		{name:".mp3", type:'audio/x-mp3'},
+		{name:".mp2 .mpa .abs .mpega", type:'audio/x-mpeg'},
+		{name:".m3u .pls", type:'audio/x-mpegurl'},
+		{name:".mp3", type:'audio/x-mpg'},
+		{name:".wma", type:'audio/x-ms-wma'},
+		{name:".la .lma", type:'audio/x-nspaudio'},
+		{name:".pac", type:'audio/x-pac'},
+		{name:".aiff .aif", type:'audio/x-pn-aiff'},
+		{name:".au", type:'audio/x-pn-au'},
+		{name:".ra .ram .rm .rmm", type:'audio/x-pn-realaudio'},
+		{name:".rpm", type:'audio/x-pn-realaudio-plugin'},
+		{name:".wav", type:'audio/x-pn-wav'},
+		{name:".wav", type:'audio/x-pn-windows-acm'},
+		{name:".ra", type:'audio/x-realaudio'},
+		{name:".rmf", type:'audio/x-rmf'},
+		{name:".m3u .pls", type:'audio/x-scpls'},
+		{name:".sd2", type:'audio/x-sd2'},
+		{name:".vqf .vql", type:'audio/x-twinvq'},
+		{name:".vqe", type:'audio/x-twinvq-plugin'},
+		{name:".wav", type:'audio/x-wav'}
+	];
+
+	// AudioElement を作成する
+	var audio = document.createElement("audio");
+
+	// エレメントを取得
+	var element = document.getElementById("edit_box01_01");
+
+
+	var s = "";
+	var i;
+	var num = param.length;
+	for(i=0;i < num;i++){
+		s += param[i].name + "(" + param[i].type + "):";
+
+		// フォーマットが対応しているか調べる
+		if(audio.canPlayType(param[i].type) !== ""){
+			s += "対応している";
+		}else{
+			s += "未対応";
+		}
+		s += "\n";
+	}
+	element.value = s;
+
+})();
+//
+</script></div></div><div id="js_source2" class="js_source"><div id="js_source_head2" class="js_source_head">ソースを開く（クリック）</div></div>
+
+<div class="break_l2">　</div>
+
+<button style="width:500px; height:100px;" id="button_audio_list">確認用オーディオ一覧を表示する</button>
+
+<script type="text/javascript"><!--
+// 匿名関数内で実行
+(function (){
+
+	var element = document.getElementById("button_audio_list");
+	
+	element.onclick = function (){
+		function NodeInsertAfter(node_new,node_ref){
+			var parent = node_ref.parentNode;
+			if(!parent)	return false;
+
+			var node =  parent.insertBefore(node_new,node_ref.nextSibling);
+			return (node == node_new);
+		}
+
+		function NodeRemove(node_ref){
+			var parent = node_ref.parentNode;
+			if(!parent)	return false;
+
+			var node =  parent.removeChild(node_ref);
+			return (node == node_ref);
+		}
+
+		// div を作成
+		var div = document.createElement("div");
+		div.innerHTML = 
+			'<div class = "list"><table class = "list_table">' +
+			'<TR><td class = "label0" style="width:150px;">フォーマット</TD>	<td class = "label1">エレメント</TD></TR>' +
+			'<TR><td class = "column0">WAVE</TD>		<td class = "column1"><audio src="http://hakuhin.jp/download/js/audio/sample_00.wav" controls preload="auto" style="width:100%; max-height:100px;"></audio></TD></TR>' +
+			'<TR><td class = "column0">MP3</TD>		<td class = "column1"><audio src="http://hakuhin.jp/download/js/audio/sample_00.mp3" controls preload="auto" style="width:100%; max-height:100px;"></audio></TD></TR>' +
+			'<TR><td class = "column0">Ogg Vorbis</TD>	<td class = "column1"><audio src="http://hakuhin.jp/download/js/audio/sample_00.ogg" controls preload="auto" style="width:100%; max-height:100px;"></audio></TD></TR>' +
+			'<TR><td class = "column0">AAC</TD>		<td class = "column1"><audio src="http://hakuhin.jp/download/js/audio/sample_00.m4a" controls preload="auto" style="width:100%; max-height:100px;"></audio></TD></TR>' +
+			'</table></div><!--list-->';
+
+		// ボタンの後に登録
+		NodeInsertAfter(div,element);
+
+		// ボタンを外す
+		NodeRemove(element);
+	};
+
+})();
+//-->
+</script>
+
+
+<div class="break_l4">　</div>
+
+
+
+<div class="label"><h3>■サーバ側にサウンドファイルのコンテンツタイプを設定する</h3></div>
+
+<div class="break_l1">　</div>
+
+<div class="left">
+ブラウザによっては、サーバから正しい<span class="strong">コンテンツタイプ</span>を得られないとオーディオが動作しません。
+<div class="break_l1">　</div>
+
+.htaccess でコンテンツタイプを追加する例です。
+</div>
+
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">.htaccess にオーディオ関連のコンテンツタイプを追加する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+AddType audio/ogg .ogg
+AddType audio/mp4 .aac
+AddType audio/mp4 .m4a
+</code></pre></div>
+</div>
+
+
+<div class="break_l4">　</div>
+
+
+</div>
+
+
+<br>
+<div class="window"><a href="http://hakuhin.jp/js/audio.html#MENU">上に戻る</a></div>
+<br>
+</div>
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_01");</script>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_02" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+<div class="title"><h2>サウンドを再生する</h2></div>
+<div class="break_l2">　</div>
+
+<script type="text/javascript"><!--
+HH_WriteSampleForJavaScript("\nURL:\<br\>\n\<input id=\"edit_02_url\" style=\"width:100%;\"\>\</input\>\<br\>\n\<input type=\"button\" id=\"button_02_load\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"読み込み\"\>\n\<input type=\"button\" id=\"button_02_play\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"再生\"\>\n\<input type=\"button\" id=\"button_02_pause\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"一時停止\"\>\n\<input type=\"button\" id=\"button_02_stop\" style=\"width:80px; height:40px; margin:0px 0px 10px 0px;\" value=\"停止\"\>\<br\>\n\n\<input type=\"range\" id=\"edit_02_slider\" style=\"width:100%;\" min=\"0\" max=\"1.0\" step=\"0.00001\" value=\"0.0\"\>\</input\>\<br\>\n\n\<div style=\"width:100%; margin:0px 0px 10px 0px;\"\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>自動再生:\<input type=\"checkbox\" id=\"input_02_autoplay\" checked\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>ループ:\<input type=\"checkbox\" id=\"input_02_loop\"\>\</span\>\n\t\<span style=\"margin:0px 50px 0px 0px;\"\>再生速度:\<input type=\"number\" id=\"input_02_rate\" value=\"1.0\" min=\"-10.0\" max=\"10.0\" step=\"0.01\"\>\</span\>\n\</div\>\nリザルト:\<br\>\n\<textarea id=\"edit_02_result\" style=\"width:100%; height:100px; margin:0px 0px 5px 0px;\" disabled\>\</textarea\>\n\n\<script type=\"text/javascript\"\>\n\<!--\n// 匿名関数内で実行\n(function (){\n\t// AudioElement を作成\n\tvar audio = new Audio();\n\n\t// オーディオのイベント\n\taudio.addEventListener(\"timeupdate\",function (e){\n\t\t// スライダーを更新\n\t\telement_slider.max = audio.duration;\n\t\telement_slider.value = audio.currentTime;\n\t},false);\n\n\t// 各エレメントを取得\n\tvar element_url = document.getElementById(\"edit_02_url\");\n\tvar element_slider = document.getElementById(\"edit_02_slider\");\n\tvar element_rate = document.getElementById(\"input_02_rate\");\n\tvar element_autoplay = document.getElementById(\"input_02_autoplay\");\n\tvar element_loop = document.getElementById(\"input_02_loop\");\n\tvar element_result = document.getElementById(\"edit_02_result\");\n\n\tvar element;\n\t\n\t// 読み込みボタンの element を取得\n\telement = document.getElementById(\"button_02_load\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\t// 送信したい URL 先\n\t\tvar url = element_url.value;\n\n\t\t// URL アドレスをセット\n\t\taudio.src = url;\n\n\t\t// 読み込み開始\n\t\taudio.load();\n\t};\n\n\n\t// 再生ボタンの element を取得\n\telement = document.getElementById(\"button_02_play\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.play();\n\t};\n\n\n\t// 一時停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_pause\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.pause();\n\t};\n\n\n\t// 停止ボタンの element を取得\n\telement = document.getElementById(\"button_02_stop\");\n\t// ボタンが押されたときに実行されるイベント\n\telement.onclick = function (){\n\t\taudio.currentTime = 0;\n\t\taudio.pause();\n\t};\n\n\n\t// 60 fps 間隔で実行する\n\tsetInterval(function (){\n\t\tvar v;\n\t\tv = element_rate.value;\n\t\taudio.playbackRate = v;\n\n\t\tv = element_autoplay.checked;\n\t\taudio.autoplay = v;\n\n\t\tv = element_loop.checked;\n\t\taudio.loop = v;\n\n\t\t// リザルトを更新\n\t\tvar s = \"\";\n\t\ts += \"currentTime:\" + audio.currentTime + \"\\n\";\n\t\ts += \"duration:\" + audio.duration + \"\\n\";\n\t\ts += \"paused:\" + audio.paused + \"\\n\";\n\t\ts += \"seeking:\" + audio.seeking + \"\\n\";\n\t\ts += \"readyState:\" + audio.readyState + \"\\n\";\n\t\telement_result.value = s;\n\n\t},1000/60);\n\t\n\t\n\t// スライダー変更時に実行されるイベント\n\telement_slider.onchange = function (){\n\t\taudio.currentTime = this.value;\n\t};\n\n\t// サーバ側で用意しているサウンドファイルのリスト\n\tvar audio_file_list = [\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.m4a\" , type:\"audio/mp4\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.mp3\" , type:\"audio/mpeg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.ogg\" , type:\"audio/ogg\"},\n\t\t{url:\"http://hakuhin.jp/download/js/audio/sample_00.wav\" , type:\"audio/wav\"}\n\t];\n\t\n\t// サポートしているコンテンツタイプを調べてデフォルト URL を設定する\n\tvar i;\n\tvar num = audio_file_list.length;\n\tfor(i=0;i\<num;i++){\n\t\tif(audio.canPlayType(audio_file_list[i].type) !== \"\"){\n\t\t\telement_url.value = audio_file_list[i].url;\n\t\t\tbreak;\n\t\t}\n\t}\n})();\n//--\>\n\</script\>");
+//-->
+</script><div class="js_sample"><div class="js_sample_head">サンプル</div><div class="js_sample_foot">
+URL:<br>
+<input id="edit_02_url" style="width:100%;"><br>
+<input type="button" id="button_02_load" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="読み込み">
+<input type="button" id="button_02_play" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="再生">
+<input type="button" id="button_02_pause" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="一時停止">
+<input type="button" id="button_02_stop" style="width:80px; height:40px; margin:0px 0px 10px 0px;" value="停止"><br>
+
+<input type="range" id="edit_02_slider" style="width:100%;" min="0" max="1.0" step="0.00001" value="0.0"><br>
+
+<div style="width:100%; margin:0px 0px 10px 0px;">
+	<span style="margin:0px 50px 0px 0px;">自動再生:<input type="checkbox" id="input_02_autoplay" checked=""></span>
+	<span style="margin:0px 50px 0px 0px;">ループ:<input type="checkbox" id="input_02_loop"></span>
+	<span style="margin:0px 50px 0px 0px;">再生速度:<input type="number" id="input_02_rate" value="1.0" min="-10.0" max="10.0" step="0.01"></span>
+</div>
+リザルト:<br>
+<textarea id="edit_02_result" style="width:100%; height:100px; margin:0px 0px 5px 0px;" disabled=""></textarea>
+
+<script type="text/javascript">
+
+// 匿名関数内で実行
+(function (){
+	// AudioElement を作成
+	var audio = new Audio();
+
+	// オーディオのイベント
+	audio.addEventListener("timeupdate",function (e){
+		// スライダーを更新
+		element_slider.max = audio.duration;
+		element_slider.value = audio.currentTime;
+	},false);
+
+	// 各エレメントを取得
+	var element_url = document.getElementById("edit_02_url");
+	var element_slider = document.getElementById("edit_02_slider");
+	var element_rate = document.getElementById("input_02_rate");
+	var element_autoplay = document.getElementById("input_02_autoplay");
+	var element_loop = document.getElementById("input_02_loop");
+	var element_result = document.getElementById("edit_02_result");
+
+	var element;
+	
+	// 読み込みボタンの element を取得
+	element = document.getElementById("button_02_load");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		// 送信したい URL 先
+		var url = element_url.value;
+
+		// URL アドレスをセット
+		audio.src = url;
+
+		// 読み込み開始
+		audio.load();
+	};
+
+
+	// 再生ボタンの element を取得
+	element = document.getElementById("button_02_play");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.play();
+	};
+
+
+	// 一時停止ボタンの element を取得
+	element = document.getElementById("button_02_pause");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.pause();
+	};
+
+
+	// 停止ボタンの element を取得
+	element = document.getElementById("button_02_stop");
+	// ボタンが押されたときに実行されるイベント
+	element.onclick = function (){
+		audio.currentTime = 0;
+		audio.pause();
+	};
+
+
+	// 60 fps 間隔で実行する
+	setInterval(function (){
+		var v;
+		v = element_rate.value;
+		audio.playbackRate = v;
+
+		v = element_autoplay.checked;
+		audio.autoplay = v;
+
+		v = element_loop.checked;
+		audio.loop = v;
+
+		// リザルトを更新
+		var s = "";
+		s += "currentTime:" + audio.currentTime + "\n";
+		s += "duration:" + audio.duration + "\n";
+		s += "paused:" + audio.paused + "\n";
+		s += "seeking:" + audio.seeking + "\n";
+		s += "readyState:" + audio.readyState + "\n";
+		element_result.value = s;
+
+	},1000/60);
+	
+	
+	// スライダー変更時に実行されるイベント
+	element_slider.onchange = function (){
+		audio.currentTime = this.value;
+	};
+
+	// サーバ側で用意しているサウンドファイルのリスト
+	var audio_file_list = [
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.m4a" , type:"audio/mp4"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.mp3" , type:"audio/mpeg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.ogg" , type:"audio/ogg"},
+		{url:"http://hakuhin.jp/download/js/audio/sample_00.wav" , type:"audio/wav"}
+	];
+	
+	// サポートしているコンテンツタイプを調べてデフォルト URL を設定する
+	var i;
+	var num = audio_file_list.length;
+	for(i=0;i<num;i++){
+		if(audio.canPlayType(audio_file_list[i].type) !== ""){
+			element_url.value = audio_file_list[i].url;
+			break;
+		}
+	}
+})();
+//
+</script></div></div><div id="js_source3" class="js_source"><div id="js_source_head3" class="js_source_head">ソースを開く（クリック）</div></div>
+
+
+
+<div class="break_l2">　</div>
+
+<div class="window">
+
+<div class="index">
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_PLAY">■サウンドを再生する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_PAUSE">■サウンドを一時停止する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_STOP">■サウンドを停止する</a></div>
+</div><!--index-->
+
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="window"><br><br>
+
+<div id="MEDIA_PLAY" class="anchor_target"></div>
+<div class="label"><h3>■サウンドを再生する</h3></div>
+<br>
+
+<div class="left">
+サウンドを再生するには、<span class="strong">play()</span> メソッドを使用します。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの再生を開始する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.<span class="point">play</span>();
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_PAUSE" class="anchor_target"></div>
+<div class="label"><h3>■サウンドを一時停止する</h3></div>
+<br>
+
+<div class="left">
+再生中のサウンドを一時停止するには、<span class="strong">pause()</span> メソッドを使用します。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの再生を開始する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+
+<span class="comment">// 再生を一時停止する</span>
+audio.<span class="point">pause</span>();
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div class="left">
+サウンドが、一時停止中であるか調べるには、<span class="strong">paused</span> プロパティを使用します。
+<div class="break_l1">　</div>
+true であれば一時停止中です。
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_STOP" class="anchor_target"></div>
+<div class="label"><h3>■サウンドを停止する</h3></div>
+<br>
+
+<div class="left">
+再生中のサウンドを停止するには、<span class="strong">pause()</span> メソッドを呼び出した後、currentTime プロパティに 0 をセットします。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの再生を停止する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+
+<span class="comment">// 再生を停止する</span>
+audio.<span class="point">pause</span>();
+audio.<span class="point">currentTime</span> = 0;
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+</div>
+
+
+<br>
+<div class="window"><a href="http://hakuhin.jp/js/audio.html#MENU">上に戻る</a></div>
+<br>
+</div>
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_02");</script>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_03" class="anchor_target"></div>
+
+<div class="bg">
+<br>
+<div class="title"><h2>サウンドを制御する</h2></div>
+<div class="break_l2">　</div>
+
+<div class="window">
+
+<div class="index">
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_CURRENT_TIME">■サウンドの再生位置を制御する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_DURATION">■サウンドの総時間を取得する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_AUTO_PLAY">■読み込み時に自動再生する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_LOOP">■ループ再生する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_PLAYBACK_RATE">■再生速度を変更する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_VOLUME">■サウンドのボリュームを制御する</a></div>
+<div class="index_item"><a href="http://hakuhin.jp/js/audio.html#MEDIA_MUTE">■サウンドのミュートを制御する</a></div>
+</div><!--index-->
+
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="window"><br><br>
+
+<div id="MEDIA_CURRENT_TIME" class="anchor_target"></div>
+<div class="label"><h3>■サウンドの再生位置を制御する</h3></div>
+<br>
+
+<div class="left">
+サウンドの再生位置を制御するには、<span class="strong">currentTime</span> プロパティを使用します。
+<div class="break_l1">　</div>
+単位は秒（小数あり）です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの再生位置を取得する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+
+<span class="comment">// 60 fps 間隔で実行する</span>
+setInterval(function (){
+
+	<span class="comment">// 再生位置を取得する</span>
+	console.log(audio.<span class="point">currentTime</span>);
+
+},1000/60);
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+
+<div id="MEDIA_DURATION" class="anchor_target"></div>
+<div class="label"><h3>■サウンドの総時間を取得する</h3></div>
+<br>
+
+<div class="left">
+サウンドの総時間を取得するには、<span class="strong">duration</span> プロパティを使用します。
+<div class="break_l1">　</div>
+単位は秒（小数あり）です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの総時間を取得する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// メタデータ読み込み完了時に実行されるイベント</span>
+audio.addEventListener("loadedmetadata",function (e){
+
+	<span class="comment">// 再生総時間を取得する</span>
+	console.log(audio.<span class="point">duration</span>);
+
+});
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_AUTO_PLAY" class="anchor_target"></div>
+<div class="label"><h3>■読み込み時に自動再生する</h3></div>
+
+<br>
+
+<div class="left">
+サウンドの読み込み時に、サウンドを自動再生するには、<span class="strong">autoplay</span> プロパティに true をセットします。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドの読み込み時に、自動的に再生する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// 自動再生を有効</span>
+audio.<span class="point">autoplay</span> = true;
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_LOOP" class="anchor_target"></div>
+<div class="label"><h3>■ループ再生する</h3></div>
+
+<br>
+
+<div class="left">
+サウンドをループ再生するには、<span class="strong">loop</span> プロパティに true をセットします。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドをループ再生する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// ループ再生を有効</span>
+audio.<span class="point">loop</span> = true;
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_PLAYBACK_RATE" class="anchor_target"></div>
+<div class="label"><h3>■再生速度を変更する</h3></div>
+
+<br>
+
+<div class="left">
+サウンドの再生速度を変更するには、<span class="strong">playbackRate</span> プロパティを使用します。
+<div class="break_l1">　</div>
+単位は倍率です。（デフォルトは 1.0）
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドを 1.5 倍速で再生する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生速度を変更する</span>
+audio.<span class="point">playbackRate</span> = 1.5;
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+</code></pre></div>
+</div>
+
+<div class="break_l2">　</div>
+
+<div id="MEDIA_VOLUME" class="anchor_target"></div>
+<div class="label"><h3>■サウンドのボリュームを制御する</h3></div>
+<br>
+
+<div class="left">
+サウンドの音量を制御するには、<span class="strong">volume</span> プロパティを使用します。
+<div class="break_l1">　</div>
+単位は 0.0（無音）～ 1.0（最大）までの間の小数値です。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドのボリュームを変更する</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+
+<span class="comment">// 音量を 0.5 に設定する</span>
+audio.<span class="point">volume</span> = 0.5;
+</code></pre></div>
+</div>
+<div class="break_l2">　</div>
+
+<div id="MEDIA_MUTE" class="anchor_target"></div>
+<div class="label"><h3>■サウンドのミュートを制御する</h3></div>
+<br>
+
+<div class="left">
+サウンドのミュートを制御するには、<span class="strong">muted</span> プロパティを使用します。
+<div class="break_l1">　</div>
+true をセットするとミュート（無音）が有効になります。
+<div class="break_l0">　</div>
+false をセットすると volume プロパティで設定した通りの音量となります。
+</div>
+
+<div class="break_l1">　</div>
+
+<div class="src">
+<div class="src_head">サウンドを無音状態にする</div>
+<div class="src_hud">
+<pre translate="no" class="src_code"><code>
+<span class="comment">// AudioElement を作成</span>
+var audio = new Audio();
+
+<span class="comment">// サウンドファイルまでの URL アドレスを指定</span>
+audio.src = "http://hakuhin.jp/download/js/audio/sample_00.wav";
+
+<span class="comment">// 再生を開始する</span>
+audio.play();
+
+<span class="comment">// ミュートを有効</span>
+audio.<span class="point">muted</span> = true;
+</code></pre></div>
+</div>
+
+<div class="break_l4">　</div>
+
+
+</div>
+
+
+<br>
+<div class="window"><a href="http://hakuhin.jp/js/audio.html#MENU">上に戻る</a></div>
+<br>
+</div>
+
+<div style="display:table; margin:10px auto -10px;">
+	<script type="text/javascript">HH_WriteSponsorRectangleBigArgument("AUDIO_03");</script>
+</div>
+
+<div class="break_bg">　</div>
+
+<div id="AUDIO_XX" class="anchor_target"></div>
+
+<div class="bg"><div class="window"><a href="http://hakuhin.jp/js.html">前のページに戻る</a></div></div>
+
+</div><!--world-->
+
+<div class="menu" id="menu_container">
+	<nav>
+		<div style="text-align:left; position:relative; top:0px;" id="menu_block">
+			<div class="hh_menu_head">メニュー</div>
+			<a href="http://hakuhin.jp/" class="hh_menu_item" id="hh_menu_item_00">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">トップ</div>
+				<div style="font-size:12px;  text-align:right;">更新履歴</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/game.html" class="hh_menu_item" id="hh_menu_item_01">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">Flash ゲーム</div>
+				<div style="font-size:12px;  text-align:right;">今すぐプレイ</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/anime.html" class="hh_menu_item" id="hh_menu_item_02">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">Flash ムービー</div>
+				<div style="font-size:12px;  text-align:right;">今すぐプレイ</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/js.html" class="hh_menu_item" id="hh_menu_item_03">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">JavaScript</div>
+				<div style="font-size:12px;  text-align:right;">プログラミング講座</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/air.html" class="hh_menu_item" id="hh_menu_item_04">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">Adobe AIR</div>
+				<div style="font-size:12px;  text-align:right;">プログラミング講座</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/as3.html" class="hh_menu_item" id="hh_menu_item_05">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">ActionScript3.0</div>
+				<div style="font-size:12px;  text-align:right;">ゲームプログラミング講座</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/as.html" class="hh_menu_item" id="hh_menu_item_06">
+				<div style="font-weight:bold; font-size:18px; text-align:left;">ActionScript1.0</div>
+				<div style="font-size:12px;  text-align:right;">ゲームプログラミング講座</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/fla_extension.html" class="hh_menu_item" id="hh_menu_item_07">
+				<div style="font-weight:bold; font-size:16px; text-align:right;">Flash 拡張機能</div>
+				<div style="font-size:12px;  text-align:right;">今すぐダウンロード</div>
+			</a>
+			<div class="hh_menu_separate"></div>
+			<a href="http://hakuhin.jp/browser_extension.html" class="hh_menu_item" id="hh_menu_item_08">
+				<div style="font-weight:bold; font-size:16px; text-align:right;">Browser 拡張機能</div>
+				<div style="font-size:12px; text-align:right;">今すぐダウンロード</div>
+			</a>
+			<div class="hh_menu_foot"></div>
+			<div class="break_l1">　</div>
+
+			<div class="mcs_container">
+				<div class="mcs_head">問答収集</div>
+				<div class="mcs_body" id="menu_mcs"><div style="font-size: 14px; font-weight: bold;"><a href="http://mcs.hakuhin.jp/javascript" style="color: rgb(0, 0, 0);">JavaScript の質問</a></div><div style="margin: 2px 0px; border-bottom: 2px dotted rgb(187, 187, 187);"></div><div style="font-size: 12px;">現在質問はありません。<div style="height:2px;"></div> → <a href="http://mcs.hakuhin.jp/javascript/#QUESTION">質問を投稿してみる</a></div><div style="height: 25px;"></div><div style="font-size: 14px; font-weight: bold;"><a href="http://mcs.hakuhin.jp/flash" style="color: rgb(0, 0, 0);">Flash 関連の質問</a></div><div style="margin: 2px 0px; border-bottom: 2px dotted rgb(187, 187, 187);"></div><div style="font-size: 12px;">現在質問はありません。<div style="height:2px;"></div> → <a href="http://mcs.hakuhin.jp/flash/#QUESTION">質問を投稿してみる</a></div><div style="height: 25px;"></div></div>
+			</div>
+			<div class="menu_contents_tab">
+				<img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/tab_new.png" class="image" width="100" height="20" alt="NEW">
+			</div>
+			<div class="menu_contents" id="menu_pr"><a href="http://hakuhin.jp/game/bs_revise.html"><img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/bs_revise_banner00.png" class="image" width="180" height="400" alt="BULLET STORM -惑星オーロンの最期- REVISED EDITION"></a><br></div>
+			<div class="break_l1">　</div>
+			<div class="menu_ads">
+				<div style="width:160px; margin:0px auto;">
+					<script type="text/javascript">HH_WriteSponsor();</script><div style="text-align:left; line-height:1.0; margin-bottom:3px;"><div style="font-size:10px; color:#888; line-height:1.0;">スポンサードリンク</div></div>
+<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px; " data-ad-client="ca-pub-2028288171521864" data-ad-slot="4341558188" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe width="160" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/saved_resource(1).html"></iframe></ins></ins></ins>
+					<div class="break_l2">　</div>
+					<script type="text/javascript">HH_WriteSponsorNoFragment();</script><div style="text-align:left; line-height:1.0; margin-bottom:3px;"><div style="font-size:10px; color:#888; line-height:1.0;">スポンサードリンク</div></div>
+<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px; " data-ad-client="ca-pub-2028288171521864" data-ad-slot="4319294411" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe width="160" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/saved_resource(2).html"></iframe></ins></ins></ins>
+				</div>
+			</div>
+			<div class="break_l1">　</div>
+			<div class="author_container">
+				<div class="author_head">author</div>
+				<div class="author_body">
+<a href="http://hakuhin.jp/atom.xml">atom</a> / 
+<a href="https://plus.google.com/u/0/113623142701014539697">google+</a> / 
+<a href="https://twitter.com/hakuhin">twitter</a> / 
+<a href="http://wonderfl.net/user/hakuhin">wonderfl</a> / 
+<a href="http://mogera.jp/userinfo?uid=mg0000000719">mogera</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div><!--menu-->
+
+
+</div><!--main--><br style="clear:both">
+
+<script type="text/javascript">HH_WriteReceive();</script><div class="receive"><div class="receive_head">このページに関するご意見やご感想がありましたらどうぞ。（非公開）<input type="button" id="receive_button" class="receive_button" value="送信"></div><div class="receive_foot">	<textarea id="receive_text" class="receive_text" rows="5"></textarea>	</div></div>
+
+<div class="foot">
+	<footer>
+		<table style="width:100%; text-align:left;"><tbody><tr><td>
+			<span style="font-size:12px;">2002-2016 / 解像度1024×768以上 / IE8.0以上推奨 / by Hakuhin</span>
+		</td><td style="width:100px; text-align:right;">
+			<script type="text/JavaScript">HH_WriteWeekCounter();</script><span style="font-size:12px;" id="week_counter">7750461</span>
+		</td></tr></tbody></table><table>
+
+		<script type="text/JavaScript">HH_LoadedDOMContent();</script>
+	
+
+
+
+
+
+
+
+
+<!-- __ANALYZE_TAG__ -->
+
+</table></footer></div></div><div id="ext_session_alive_reload_prompt" style="display: none;"><div><div>To Keep Your Session Active<br>page will reload in <span id="session_live_reloader_countdown">30</span> seconds<br><a id="ext_session_alive_reload_rule_id" href="chrome-extension://lhobbakbeomfcgjallalccfhfcgleinm/settings.html" target="_rule_settings">Edit Rule<br></a></div><div><button type="button" id="ext_session_alive_reload_cancel">Wait 1 minute</button></div></div></div><style></style><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/translate_24dp.png" width="20" height="20" alt="Google 翻訳"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">翻訳を改善する</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><span style="border-radius: 2px !important; text-indent: 20px !important; width: auto !important; padding: 0px 4px 0px 0px !important; text-align: center !important; font-style: normal !important; font-variant: normal !important; font-weight: bold !important; font-stretch: normal !important; font-size: 11px !important; line-height: 20px !important; font-family: &quot;Helvetica Neue&quot;, Helvetica, sans-serif !important; color: rgb(255, 255, 255) !important; background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28) !important; position: absolute !important; opacity: 1 !important; display: none; cursor: pointer !important; border: none !important; -webkit-font-smoothing: antialiased !important;">保存</span><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><iframe frameborder="0" class="goog-te-menu-frame skiptranslate" style="visibility: visible; box-sizing: content-box; width: 993px; height: 269px; display: none;" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/saved_resource(3).html"></iframe><div id="hfc_help" style="display: none; border-radius: 5px; background-color: rgb(68, 121, 105); opacity: 0.95; overflow-y: scroll; padding: 10px 25px; z-index: 9999; position: fixed; top: 30px; left: 5%; width: 88%; height: 88%; color: white;"><h2 style="font-family: arial, sans-serif; font-size: 20px; height: 25px; color: rgb(227, 227, 136);">Hands Free Chrome Command Guide</h2><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">help</kbd> again to hide this guide. Use the scrolling commands to scroll up or down. </p><p style="font-style: italic; font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Note: the most common problem is a command being misheard by the speech engine. By observing the Hands Free input window, you can see what it thinks you said. This may help you learn the proper enunciations necessary in order to be understood more readily. </p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Scrolling</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To scroll up a small amount, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">up</kbd>.<br>To scroll down a small amount, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">down</kbd>.<br>To scroll a small amount to the right, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">right</kbd>.<br>To scroll a small amount to the left, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">left</kbd>.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To page up, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">rise</kbd>.<br>To page down, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">fall</kbd>.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To scroll to the bottom of the page, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">bottom</kbd>.<br>To scroll to the top of the page, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">top</kbd>.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To set the page scrolling continuously up, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">keep scrolling up</kbd>.<br>To set the page scrolling continuously down, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">keep scrolling down</kbd>.<br>To stop the page from continously scrolling, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">stop</kbd>.<br>To control the speed of scrolling, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">faster</kbd> or <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">slower</kbd>. The changes will be small, but you can issue these commands repeatedly for incremental gains.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Clicking</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To paint number tags alongside what are most likely visible, clickable elements on the page, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd>. The tags will appear near the upper left corner of the corresponding link, image, or input form. Use your best judgement to tell which is which.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To click a numbered element, simply speak the number. Enunciate very clearly.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">If you decide not to click on anything, saying <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd> a second time will hide the number tags, as will using any of the scrolling commands.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">If the element you wish to click is not numbered by <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd>, try using <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">guide</kbd> instead. Saying <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">guide</kbd> while the <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd> tags are active will hide the existing tags and draw new ones. The same is true in reverse.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">The system by which clickable elements are numbered will be heavily improved in the future, but for the time being there may be many frustrations in the placement of the numbers.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To alleviate this, there is a <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">show</kbd> command, which will sloppily paint numbers over nearly everything, including elements you cannot see and therefore cannot click on. It's a last resort. But if <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd> and <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">guide</kbd> don't paint a number next to the element you wish to click, the odds are very high that <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">show</kbd> will get the job done.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Again, saying <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">show</kbd> while <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">map</kbd> or <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">guide</kbd> are active will just hide the existing tags and draw new ones.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;"><i>Note: There is currently no support for dropdown menus.</i></p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Dictation Mode</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">If you’ve clicked a text input, Hands Free will switch into dictation mode, and anything you say will be written as text into the selected text input.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To turn off dictation mode and return to the normal control functionality, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">stop</kbd>.<br>To submit the textbox you’re typing in (the equivalent of pressing ‘enter’), say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go</kbd>. This is what you want when you finish typing in a searchbox, for example.<br>To move the cursor to the next input in the form (for example, from username to password), say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">next</kbd>.<br><br>To remove the last word you entered from the textbox, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">undo</kbd>.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Navigation</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To go to ANY website, say the name of the website on its own with the domain specified. There is no need to say “www.”<br>Examples: <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">google.com</kbd>, <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">en.wikipedia.org</kbd> (pronounced E-N-dot-wikipedia-dot-org), <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">mit.edu</kbd> (pronounced M-I-T-dot-E-D-U), <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">fr.wikipedia.org</kbd> (pronounced F-R-dot-wikipedia-dot-org)</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To go to a particular .com website, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go to [website name]</kbd>. You can include the .com or omit it.<br>Examples: <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go to google</kbd>, <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go to google.com</kbd>, <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go to amazon</kbd>, <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">go to facebook</kbd></p><p style="font-style: italic; font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Note: there are some websites with longer names which will register erroneously with the engine. For example, there is no way to reach freecreditreport.com, which will be heard as “free credit report.com”, and will consequently send you to report.com.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To go back one page in your history, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">back</kbd>.<br>To go forward one page in your history, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">forward</kbd>.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To go to google.com, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">home</kbd>. This will also automatically put the extension into dictation mode, and is the fastest way to search for things.</p><p style="font-style: italic; font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Note: Google can be used to indirectly reach almost any website that you can't navigate to directly via Hands Free. For instance, going to Google and searching for "free credit report.com" will correctly bring up as a result the actual "freecreditreport.com", which you can then click on.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Controlling Tabs</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To open a new tab, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">new tab</kbd>.</p><p style="font-style: italic; font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Note: When opening a new tab, only the "go to" command and tab control commands will work unless you have installed the new tab redirect extension, which will cause new tabs to default to a page of your choosing. That extension can be found on <a href="https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna?hl=en">the Chrome Web Store.</a></p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To close the current tab, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">close tab</kbd>.<br>To switch the active tab to the next tab in the window, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">switch</kbd>.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Controlling the Window</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To enter or exit full screen mode, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">full screen</kbd>. All commands work just the same in full screen mode.<br>To minimize, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">minimize</kbd>.</p><p style="font-style: italic; font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Note: Unfortunately the ‘maximize’ command is broken in Chrome. You may be able to restore your window from a minimized state by using the full screen command and then toggling it off, but this has lately proved unreliable. Using the minimize command is currently not recommended.</p><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To close all Chrome windows entirely, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">exit</kbd> or <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">quit</kbd>.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Zooming</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To zoom in, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">zoom in</kbd><br>To zoom out, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">zoom out</kbd>.<br>To restore the zoom level to normal, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">zoom normal</kbd>.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Refreshing</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">To reload the page, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">reload</kbd> or <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">refresh</kbd>.</p><h3 style="font-family: arial, sans-serif; font-size: 15px; height: 18px; color: rgb(227, 227, 136);">Closing Hands Free</h3><p style="font-size: 17px; text-align: left; margin-top: 17px; margin-bottom: 17px; line-height: 25px;">Lastly, to turn off Hands Free, say <kbd style="padding: 0.03em 0.3em; border: 1px solid rgb(204, 204, 204); font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; background-color: rgb(247, 247, 247); color: rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; border-radius: 3px; display: inline-block; margin: 0px 0.1em; text-shadow: rgb(255, 255, 255) 0px 1px 0px; line-height: 1.4; white-space: nowrap;">done</kbd>.</p></div><div id="UMS_TOOLTIP" style="position: absolute; cursor: pointer; z-index: 2147483647; background: transparent; top: -100000px; left: -100000px;"></div><iframe id="google_osd_static_frame_4559814015165" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./JavaScriptプログラミング講座_オーディオについて_HTMLAudioElement_files/saved_resource(4).html"></iframe></body><umsdataelement id="UMSSendDataEventElement"></umsdataelement></html>

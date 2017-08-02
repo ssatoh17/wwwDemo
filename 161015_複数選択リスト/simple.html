@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<div class="oneNoteWebClipperIsInstalledOnThisBrowser" style="display: none;"></div>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>jQuery MultiSelect Widget Demo</title>
+
+<style type="text/css">
+    body { font-family: Arial,Helvetica,sans-serif; font-size: 12px; }
+</style>
+
+<!--<link rel="stylesheet" type="text/css"  href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/sunny/jquery-ui.css">-->
+<link rel="stylesheet" type="text/css" href="themes/sunny/jquery-ui.css">
+
+<!--ローカルに必要-->
+<link rel="stylesheet" type="text/css" href="jquery.multiselect.css">
+
+<!--
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+-->
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+
+<!--ローカルに必要-->
+<script type="text/javascript" src="jquery.multiselect.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+       $(".ui-multiselect").multiselect(); 
+    });
+</script>
+
+</head>
+
+<body>
+
+<h2>jQuery Multiselect Widget demo</h2>
+<p>Note: jQuery UI 'Sunny' Theme applied.</p>
+<p>
+    <select multiple="multiple" size="10" class="ui-multiselect" style="display: none;">
+        <option value="1">Option value 1</option>
+        <option value="2">Option value 2</option>
+        <option value="3">Option value 3</option>
+        <option value="4">Option value 4</option>
+        <option value="5">Option value 5</option>
+        <option value="6">Option value 6</option>
+        <option value="7">Option value 7</option>
+    </select>
+    
+<!--    <button type="button" class="ui-multiselect ui-widget ui-state-default ui-corner-all" aria-haspopup="true" style="width: 225px;"><span class="ui-icon ui-icon-triangle-2-n-s"></span><span>Select options</span></button>-->
+</p>
+    
+</div>
+</body>
+</html>

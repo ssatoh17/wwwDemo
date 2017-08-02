@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+	<title>Slinky-jQuery sliding menu スライディングメニュー（ドリルダウンメニュー）デモ</title>
+
+    <link rel="stylesheet" href="master.css?v3">
+	<link rel="stylesheet" href="dist/jquery.slinky.css?v3">
+</head>
+
+<body>
+	<div class="wrapper">
+
+        <header>
+			<h1>Slinky（スリンキー？？）</h1>
+			<h2>jQuery sliding menu（ドリルダウン型のプルダウンメニュー）</h2>
+			<p>A light-weight, responsive, mobile-like navigation menu plugin</p>
+            <pre>
+必要なファイルは４つ。
+    １．jquery.slinky.js
+    ２．master.css?v3 ← ファイル名には、?v3は含まれない
+    ３．jquery.slinky.css?v3
+    ４．jquery.js（https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js）
+            </pre>
+            
+		</header>
+        
+		<section>            
+			<h3>Demo</h3>
+			<div id="menu" class="slinky-menu">                
+				<ul>                    
+					<li>
+						<a href="https://designplox.com/">I'm an external URL（外部リンク）</a>
+					</li>
+					<li>
+						<a href="#">Artists</a>
+						<ul>
+							<li>
+								<a href="#">Aerosmith</a>
+								<ul>
+									<li>
+										<a href="#">Get Your Wings</a>
+										<ul>
+											<li>
+												<a href="#">Train Kept A-Rollin'</a>
+											</li>
+											<li>
+												<a href="#">Same Old Song and Dance</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Eagles</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+										<ul>
+											<li>
+												<a href="#">Hotel California</a>
+											</li>
+											<li>
+												<a href="#">Pretty Maids All in a Row</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Led Zeppelin</a>
+								<ul>
+									<li>
+										<a href="#">Physical Graffiti</a>
+										<ul>
+											<li>
+												<a href="#">In My Time of Dying</a>
+											</li>
+											<li>
+												<a href="#">Houses of the Holy</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+                                                
+						<a href="#">Albums</a>
+						<ul>
+							<li>
+								<a href="#">Get Your Wings</a>
+								<ul>
+									<li>
+										<a href="#">Train Kept A-Rollin'</a>
+									</li>
+									<li>
+										<a href="#">Same Old Song and Dance</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Hotel California</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+									</li>
+									<li>
+										<a href="#">Pretty Maids All in a Row</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Physical Graffiti</a>
+								<ul>
+									<li>
+										<a href="#">In My Time of Dying</a>
+									</li>
+									<li>
+										<a href="#">Houses of the Holy</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    
+                    </li>
+					<li>
+                        
+						<a href="#">Songs</a>
+						<ul>
+							<li>
+								<a href="#">In My Time of Dying</a>
+							</li>
+							<li>
+								<a href="#">Houses of the Holy</a>
+							</li>
+							<li>
+								<a href="#">Hotel California</a>
+							</li>
+							<li>
+								<a href="#">Pretty Maids All in a Row</a>
+							</li>
+							<li>
+								<a href="#">Train Kept A-Rollin'</a>
+							</li>
+							<li>
+								<a href="#">Same Old Song and Dance</a>
+							</li>
+						</ul>
+					
+                    </li>
+					<li>
+                        
+						<a href="#">Genres</a>
+						<ul>
+							<li>
+								<a href="#">Rock</a>
+								<ul>
+									<li>
+										<a href="#">Hotel California</a>
+									</li>
+									<li>
+										<a href="#">Pretty Maids All in a Row</a>
+									</li>
+									<li>
+										<a href="#">Train Kept A-Rollin'</a>
+									</li>
+									<li>
+										<a href="#">Same Old Song and Dance</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">Hard rock</a>
+								<ul>
+									<li>
+										<a href="#">In My Time of Dying</a>
+									</li>
+									<li>
+										<a href="#">Houses of the Holy</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    </li>
+					<li>
+                        
+						<a href="#">Settings</a>
+						<ul>
+							<li>
+								<a href="#">Profile</a>
+							</li>
+							<li>
+								<a href="#">Player</a>
+								<ul>
+									<li>
+										<a href="#">Volume</a>
+									</li>
+									<li>
+										<a href="#">Equalizer</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					
+                    </li>                    
+				</ul>
+			</div>
+		</section>
+        
+        
+	</div>
+	<footer>
+	</footer>
+</body>
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="dist/jquery.slinky.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#menu').slinky({
+			title: true,
+		});
+	});
+</script>
+
+    
+</html>

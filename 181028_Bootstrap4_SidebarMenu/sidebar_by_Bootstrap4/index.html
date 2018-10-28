@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <style>
+        .CSSだけでプログレスバーを作れるかもしれない {
+            width: 500px;
+            height: 200px;
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- Sidebar（⇔ Page Content） グローバルナビゲーションにしたい -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap 4 Sidebar</h3>
+                <strong>BSS</strong>
+                <!-- <button type="button" id="sidebarCollapse" class="btn btn-info"> -->
+                <!-- <button type="button" id="sidebarの開閉トグル" class="btn btn-info sidebarCollapse"> -->
+                <button type="button" id="sidebarの開閉トグル" class="btn b4- btn-default sidebarCollapse">
+                        <!-- <i class="fas fa-align-left"></i> -->
+                    <!-- <span>←</span> -->
+                    <span><<</span>
+                </button>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-home"></i>
+                        <!-- <span class="d-lg-none d-xl-none">管理</span> -->
+                        <span>管理</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#home1">出品管理</a>
+                        </li>
+                        <li>
+                            <a href="#home2">在庫管理</a>
+                        </li>
+                        <li>
+                            <a href="#">売上管理</a>
+                        </li>
+                        <li>
+                            <a href="#">アカウント管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-briefcase"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        <span>Pages</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-image"></i>
+                        <span>Portfolio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question"></i>
+                        <span>マニュアル・FAQ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>お問い合わせ</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info"> -->
+                    <button type="button" class="btn btn-info sidebarCollapse d-lg-none">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar(スマホのみ表示)</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Page A</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page B</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page C</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page D</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h2>Collapsible Sidebar Using Bootstrap 4</h2>
+            <p>Popper.js も使っている</p>
+            <p>仕組み：cssだけで完結。トグルボタンでaddClassメソッドでactiveクラスをトグルして、display:noneを使って不要なものを非表示にしているだけ。</p>
+            <b>
+                サイドバーを折りたたんだときに文字も表示するには、style.cssの以下の記述をコメントアウトすればOK
+                <pre>
+                #sidebar.active a > span {
+                    display: none;
+                }
+                </pre>
+            </b>
+
+            Bootstrapのw-25、w-50、w-75、h-25のテスト（要素を重ねて手前のwidthを変えるだけでプログレスバーを作れるかも）
+            <div class="CSSだけでプログレスバーを作れるかもしれない">
+                <div class="bg-primary w-25 h-25">BAR(w-25)</div>
+                <div class="bg-light w-50 h-25">BAR(w-50)</div>
+                <div class="bg-primary w-75 h-25">BAR(w-75)</div>
+                <div class="bg-success w-20 h-25">BAR(w-20は無い⇒100％として扱われる)</div>
+            </div>
+            <p></p>
+            ボタン(btn)：<button class="btn btn-primary">class="btn btn-primary"</button>　<button class="btn btn-info">class="btn btn-info"</button>　
+            <button class="btn btn-danger">class="btn btn-danger"（削除ボタン等に使う）</button>
+
+            <section class="py-2">
+                <p>タブメニューの例</p>
+                <h4 class="mb-1 text-center">How to use（タブメニューのサンプル）</h4>
+                <div class="container">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a href="#ios" class="nav-link" data-toggle="tab">iOS</a></li>
+                        <li class="nav-item"><a href="#android" class="nav-link" data-toggle="tab">Android</a></li>
+                        <li class="nav-item"><a href="#WindowsPhone" class="nav-link active" data-toggle="tab">Windows Phone</a></li>
+                    </ul>
+                    <div class="tab-content py-4">                        
+                        <div id="ios" class="tab-pane"> <!-- デフォルト表示タブに「active」をつける -->
+                            <p>Hul要素でタブメニューを構成する。</p>
+                            <p>classにnav、nav-tabs、nav-item、tab-content、tab-pane、data-toggle="tab"等を指定するだけで、タブメニューが作れる！</p>
+                        </div>
+                        <div id="android" class="tab-pane">
+                            <p>Hello Android. Hello Android. Hello Android. Hello Android. Hello Android. Hello Android. Hello Android. Hello Android. Hello Android.</p>
+                        </div>
+                        <div id="WindowsPhone" class="tab-pane active">
+                                <p>ul要素でタブメニューを構成する。</p>
+                                <p>classにnav、nav-tabs、nav-item、tab-content、tab-pane、data-toggle="tab"等を指定するだけで、タブメニューが作れる！</p>
+                        </div>    
+                    </div>
+                </div>
+            </section>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h2>Lorem Ipsum Dolor</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h2>Lorem Ipsum Dolor</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            <div class="line"></div>
+
+            <h3>Lorem Ipsum Dolor</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        </div>
+
+        <div id="フッター">
+            フッター部分
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let mlデフォルト_開閉トグルボタン = $('#sidebarの開閉トグル').css('margin-left');
+            console.log(mlデフォルト_開閉トグルボタン);
+            let minWidthデフォルト_サイドバー = $('#sidebar').css('min-width');
+            console.log(minWidthデフォルト_サイドバー);
+
+            // $('#sidebarCollapse').on('click', function () {                
+            $('.sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active'); // activeクラスをトグルして実現していた。
+
+                //閉じた（狭まった）時にclassに「active」がつく
+                if($('#sidebar').hasClass('active')){
+                    $('#sidebarの開閉トグル').text('>>');
+                    $('#sidebarの開閉トグル').css('margin-left','-9px');
+                }else{
+                    $('#sidebarの開閉トグル').text('<<');
+                    $('#sidebarの開閉トグル').css('margin-left',mlデフォルト_開閉トグルボタン);
+                }
+
+                //スマホの時だけはSideBarのテキスト(タイトル)の表示をする(モーダルになるため)場合
+                // if(window.innerWidth<768){
+                if(window.innerWidth<992){
+                    $('#sidebarの開閉トグル').text('<<'); // 必須
+                    $('#sidebar').css('min-width',minWidthデフォルト_サイドバー); // 必須 
+
+                    $('#sidebar.active a > span').css('display','');
+                    $('#sidebar.active').css('min-width','200px');
+                    $('#sidebar.active').css('max-width','200px');
+                    $('#sidebar.active ul li a').css('text-align','left');
+                }else{
+                    $('#sidebar a > span').css('display','');                                        
+                    $('#sidebar.active a > span').css('display','none');                                        
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>
